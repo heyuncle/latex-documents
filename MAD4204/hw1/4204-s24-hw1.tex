@@ -1,0 +1,104 @@
+\documentclass[11pt,letterpaper]{article}
+\usepackage{fullpage}
+\usepackage{multicol}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx, nicefrac}
+\usepackage{tikz, nicefrac}
+
+\newcommand{\ds}{\displaystyle}
+\newcommand{\bv}{\mathbf}
+\newcommand{\lv}{\langle}
+\newcommand{\rv}{\rangle}
+
+\begin{document}
+
+%%%Version 1%%%%
+
+\flushleft
+
+\begin{center}
+\begin{large}\textbf{MAD 4204, Homework 1}\end{large}	
+\end{center}
+
+\pagestyle{empty}
+
+
+\flushleft
+
+\textbf{Standard notation:} Recall from class that $[n] := \{1,2,\dots,n\}$ and that for $S$ a set and $k \in \mathbb{N}$ that $\binom{S}{k}$ is the set of $k$--element subsets of $S$.
+Also, let $2^S$ denote the power set of $S$.
+For $\mathcal{F} \subseteq 2^S$, we say $F \in \mathcal{F}$ is \emph{maximal} if $F \subseteq F' \in \mathcal{F}$ implies $F' = F$ and \emph{maximum} if $|F'| \leq |F|$ for all $F' \in \mathcal{F}$.
+
+\ 
+
+A \emph{matroid} $\mathcal{M}_B$ on the finite ground set $S$ defined in terms of bases is a set $\mathcal{M}_B \subseteq \binom{S}{k}$ satisfying the \emph{exchange property}: for all $A, B \in \mathcal{M}_B$ and $a \in A$ there exists some $b \in B$ so that the set $(A \setminus \{a\}) \cup \{b\}$ is in $\mathcal{M}_B$.
+Here, each $B \in \mathcal{M}$ is a \emph{basis}.
+
+\ 
+
+
+
+\textbf{Problems to turn in:}
+
+\begin{enumerate}
+
+\item Let $G = ([n],E)$ be a graph and let $\overline{G} = ([n], \binom{[n]}{2} \setminus E)$ be its complement.
+Prove for $n$ sufficiently large that at least one of $G$ and $\overline{G}$ contains a cycle.
+
+Your proof should include a value $n$ that guarantees this property.
+
+\item Let $G = ([n],E)$ be a finite simple graph.
+Let $M$ be a maximal matching in $G$ and $M'$ be a maximum matching in $G$.
+Prove that $|M'| \leq 2 |M|$.
+
+
+\item For $\mathcal{M}$ a matroid on ground set $S$ defined in terms of bases, we say $I \subseteq S$ is \emph{independent} if there exists $B \in \mathcal{M}$ so that $I \subseteq B$.
+An alternate definition of a matroid $\mathcal{M}_I$ on ground set $S$ in terms of independent sets is that $\mathcal{M}_I \subseteq 2^{S}$ so that:
+\begin{itemize}
+	\item (hereditary property) if $A \subseteq B \in \mathcal{M}_I$, then $A \in \mathcal{M}_I$,
+	\item (augmentation property) for $A, B \in \mathcal{M}_I$ with $|A| < |B|$ there exists $b \in B$ so that $A \cup \{b\} \in \mathcal{M}_I$.
+\end{itemize}
+We show these definitions are equivalent by solving:
+\begin{enumerate}	
+	\item For $\mathcal{M}_I$ a matroid defined in terms of its independent sets, we say $B \in \mathcal{M}_I$ is a \emph{basis} if $B$ is maximal in $\mathcal{M}_I$.
+	Prove two bases in $\mathcal{M}_I$ satisfy the exchange property.
+	
+	\item For $\mathcal{M}_B$ a matroid defined in terms of its bases, show that two independent sets $A,B$ of $\mathcal{M}$ satisfy the augmentation property.
+	
+	(Compare this with Lemma 10.10 in the course text)
+\end{enumerate}
+ 
+\item For $\mathcal{M}$ a matroid on ground set $S$ (from Problem 3, we can define it in terms of bases or independent sets, whichever is more convenient), let $w:S \to \mathbb{R}_{\geq 0}$.
+For $B$ a basis in $\mathcal{M}$, define $w(B) = \sum_{b \in B} w(b)$.
+
+Describe an algorithm for finding the basis $B$ minimizing $w(B)$ and prove that it is optimal.
+
+(Hint: compare to the greedy algorithm for finding the minimum weighted spanning tree)
+
+
+
+
+\end{enumerate}
+
+\textbf{Recommended problems:}
+\begin{enumerate}
+
+
+\item Read Chapter 3 if you haven't already.
+
+\item Do all the Quick Check problems in Chapters 9 and 10.1.
+\item For $G = (V,E)$ a finite simple graph, the \emph{neighborhood} of $v \in V$ is the set $N(v) := \{u \in V: (u,v) \in E\}$ and the \emph{degree} of $v$ is $d(v) := |N(v)|$.
+
+Is there a simple graph $G$ on six vertices whose degrees are 4,4,4,2,1,1?
+This is called the \emph{degree sequence} of $G$.
+
+\item Find two trees with the same degree sequence that are not isomorphic.
+\item Exercise 10.10: For $G$ a finite simple graph, show at least one of $G$ and $\overline{G}$ is connected.
+
+
+
+\end{enumerate}
+
+\end{document}

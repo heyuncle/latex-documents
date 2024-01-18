@@ -1,0 +1,60 @@
+\documentclass[11pt,letterpaper]{article}
+\usepackage{fullpage}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[dvipsnames]{xcolor}
+
+\newenvironment{solution}{\color{Periwinkle}\textit{Solution.}}{\color{black}}
+
+\begin{document}
+\begin{center}
+    \begin{large}
+        \textbf{Homework 1} \\
+        MAD4204 \\
+        Carson Mulvey
+    \end{large}
+\end{center}
+
+\begin{enumerate}
+
+    \item Let $G = ([n],E)$ be a graph and let $\overline{G} = ([n], \binom{[n]}{2} \setminus E)$ be its complement.
+    Prove for $n$ sufficiently large that at least one of $G$ and $\overline{G}$ contains a cycle.
+    
+    Your proof should include a value $n$ that guarantees this property.
+
+    \begin{solution}
+        Test
+    \end{solution}
+    
+    \item Let $G = ([n],E)$ be a finite simple graph.
+    Let $M$ be a maximal matching in $G$ and $M'$ be a maximum matching in $G$.
+    Prove that $|M'| \leq 2 |M|$.
+    
+    
+    \item For $\mathcal{M}$ a matroid on ground set $S$ defined in terms of bases, we say $I \subseteq S$ is \emph{independent} if there exists $B \in \mathcal{M}$ so that $I \subseteq B$.
+    An alternate definition of a matroid $\mathcal{M}_I$ on ground set $S$ in terms of independent sets is that $\mathcal{M}_I \subseteq 2^{S}$ so that:
+    \begin{itemize}
+        \item (hereditary property) if $A \subseteq B \in \mathcal{M}_I$, then $A \in \mathcal{M}_I$,
+        \item (augmentation property) for $A, B \in \mathcal{M}_I$ with $|A| < |B|$ there exists $b \in B$ so that $A \cup \{b\} \in \mathcal{M}_I$.
+    \end{itemize}
+    We show these definitions are equivalent by solving:
+    \begin{enumerate}	
+        \item For $\mathcal{M}_I$ a matroid defined in terms of its independent sets, we say $B \in \mathcal{M}_I$ is a \emph{basis} if $B$ is maximal in $\mathcal{M}_I$.
+        Prove two bases in $\mathcal{M}_I$ satisfy the exchange property.
+        
+        \item For $\mathcal{M}_B$ a matroid defined in terms of its bases, show that two independent sets $A,B$ of $\mathcal{M}$ satisfy the augmentation property.
+        
+        (Compare this with Lemma 10.10 in the course text)
+    \end{enumerate}
+     
+    \item For $\mathcal{M}$ a matroid on ground set $S$ (from Problem 3, we can define it in terms of bases or independent sets, whichever is more convenient), let $w:S \to \mathbb{R}_{\geq 0}$.
+    For $B$ a basis in $\mathcal{M}$, define $w(B) = \sum_{b \in B} w(b)$.
+    
+    Describe an algorithm for finding the basis $B$ minimizing $w(B)$ and prove that it is optimal.
+    
+    (Hint: compare to the greedy algorithm for finding the minimum weighted spanning tree)
+
+\end{enumerate}    
+
+\end{document}
