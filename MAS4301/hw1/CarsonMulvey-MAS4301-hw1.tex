@@ -1,0 +1,76 @@
+\documentclass[11pt,letterpaper]{article}
+%\usepackage{fullpage}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{textcomp}
+
+\newcommand{\N}{\mathbb{N}}
+
+\newenvironment{solution}{\color{blue}\textit{Solution.}}{\color{black}}
+
+\begin{document}
+\begin{center}
+    \begin{large}
+        \textbf{Homework 1} \\
+        MAS4301 \\
+        Carson Mulvey
+    \end{large}
+\end{center}
+
+\begin{enumerate}
+\item[\textbf{NB 1.3}]
+    \begin{enumerate}
+        \item We will prove by contradiction, assuming the WOP to be true and the first version of the AoI to be false.
+        
+        Let set $S\subseteq{\mathbb{N}}$ satisfy conditions (i) and (ii) as defined in problem NB 1.1. For AoI false, we have $S\neq{\mathbb{N}}$. Since $S\subseteq{\mathbb{N}}$, we must have $\mathbb{N}\nsubseteq{S}$. Consider the \textit{complement} of S, defined by $S':=\{n\in{\mathbb{N}}\mid{}n\notin{S}\}$. Since $\mathbb{N}\nsubseteq{S}$, there exists $n\in{\mathbb{N}}$ such that $n\notin{S}$. Thus $S'\neq{\varnothing}$.
+        
+        Using the WOP, let $w\in{S'}$ be the minimal element of $S'$. Then for all $a\in{\N}$, if $a<w$, then $a\notin{S'}$, so $a\in{S}$. If $w=1$, then $1\notin{S}$, contradicting (i). Thus $w>1$. Then $w-1\in{\N}$, and since $w-1<w$, applying (ii) gives $(w-1)+1=w\in{S}$. But since $w\in{S'}$, $w\notin{S}$, so we have a contradiction.
+        
+        Since the contradiction formed from the assumption of the WOP being true and the first version of the AoI is false, we conclude that the WOP implies the first version of the AoI. \qedsymbol{}
+        \item We will prove by contradiction, assuming the second version of the AoI to be true and the WOP to be false.
+    
+        Let there be $T\subseteq{\N}$ such that $T\neq{\varnothing}$. Since the WOP is false, there is no smallest element of $T$. If $1\in{T}$, then $1$ is the smallest element of $T$, which forms a contradiction. Thus for $T'$ the complement of $T$ as defined in (a), $1\in{T'}$. 
+
+        Suppose that for some $n\in{\N}$, we have every natural number $j\leq{n}$ in ${T'}$. This must be true for some $n\geq{1}$ since $1\in{T'}$. Then if $n+1\notin{T'}$, we have $n+1\in{T}$. However, since $1,2,\dots,n\notin{T}$, $n+1$ would then be the smallest element, forming a contradiction. Thus $n+1\in{T'}$.
+
+        Then $T'$ satisfies both (i) and (ii)' of the AoI as defined in NB 1.1. Thus $T'=\N$, which implies that $T={\varnothing}$. But since $T$ was defined as nonempty, we have a contradiction.
+
+        Since the contradiction was formed from assuming the second version of the AoI to be true and the WOP to be false, we conclude that the second version of the AoI implies the WOP. \qedsymbol{}
+    \end{enumerate}
+\item[\textbf{1.16}] A parallelogram that is neither a rhombus nor a rectangle has symmetries of $R_0$ (rotation of 0\textdegree{}) and $R_{180}$ (rotation of 180\textdegree{}). 
+
+A rhombus that is not a rectangle has additional symmetries of $D$ (flip about the main diagonal) and $D'$ (flip about the other diagonal).
+\item[\textbf{2.8}] $\{1,3,7,9,11,13,17,19\}$
+\item[\textbf{2.12}] $2^{-1}=5$, $7^{-1}=4$, $8^{-1}=8$
+\item[\textbf{2.14}] $(ab)^3=ababab$, $(ab^{-2}c)^{-2}=c^{-1}b^{2}a^{-1}c^{-1}b^{2}a^{-1}$
+\item[\textbf{2.26}] Let $a$ be an arbitrary element chosen in a group $G$. Then let $b=a^{-1}$, so that $ab=ba=e$. But by definition, $a$ must also be the inverse of $b$. Then $b^{-1}=a$. Substituting $b=a^{-1}$ gives $(a^{-1})^{-1}=a$ as desired. \qedsymbol{}
+\item[\textbf{2.28}] $(a_1a_2\cdots a_n)^{-1}=a_n^{-1}a_{n-1}^{-1}\cdots a_1^{-1}$
+\item[\textbf{2.34}] Let $(ab)^2=a^2b^2$. Then
+    \begin{align*}
+    ab = (ab)^2(ab)^{-1} \\
+    = a^2b^2(b^{-1}a^{-1}) \\
+    = a^2ba^{-1}.
+    \end{align*}
+    Using this, we get
+    \begin{align*}
+    ba = (a^{-1}a)ba
+    = a^{-1}(ab)a
+    = a^{-1}(a^2ba^{-1})a
+    = ab.
+    \end{align*}
+
+    Conversely, let $ab=ba$. Then
+    \begin{align*}
+    (ab)^2 = (ab)(ab) \\
+    = a(ba)b \\
+    = a(ab)b \\
+    = (aa)(bb) \\
+    = a^2b^2
+    \end{align*}
+    as desired. \qedsymbol{}
+\end{enumerate}
+
+\end{document}

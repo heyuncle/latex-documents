@@ -1,0 +1,109 @@
+% Document class and font size
+\documentclass[a4paper,9pt]{extarticle}
+
+% Packages
+\usepackage[utf8]{inputenc} % For input encoding
+\usepackage{geometry} % For page margins
+\geometry{letterpaper, margin=0.75in} % Set paper size and margins
+\usepackage{titlesec} % For section title formatting
+\usepackage{enumitem} % For itemized list formatting
+\usepackage{hyperref} % For hyperlinks
+\usepackage{tabularx}
+\usepackage{fancyhdr}
+
+% Formatting
+\setlist{noitemsep} % Removes item separation
+\titleformat{\section}{\large\bfseries}{\thesection}{1em}{}[\titlerule] % Section title format
+\titlespacing*{\section}{0pt}{\baselineskip}{\baselineskip} % Section title spacing
+%%%%%%%%%%
+
+% Begin document
+\begin{document}
+
+% Disable page numbers
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}
+\fancyhead{}
+\fancyhead[L]{\textit{John Doe}}
+\fancyhead[R]{\textit{\# month \#year}}
+\thispagestyle{empty} % Remove header from the first page
+
+% Header
+\begin{flushleft}
+\textbf{\LARGE Carson Mulvey}\\[2pt] % Name
+% \#Current job position, Organization, \#City, \#Country \\ (unused) 
+\href{mailto:carson.mulvey@ufl.edu}{carson.mulvey@ufl.edu} | \href{https://www.linkedin.com/in/carson-mulvey}{LinkedIn} | \href{https://github.com/heyuncle}{Github} % Contact info
+\end{flushleft}
+
+% Education Section
+\section*{RESEARCH INTERESTS}
+\noindent
+Discrete math, combinatorics, mathematical modelling, natural language processing, machine learning
+% Education Section
+\section*{EDUCATION}
+\noindent
+\textbf{University of Florida}, Gainesville, Florida \hfill August 2022 | May 2026\\ % University name and location
+Bachelor of Science in Computer Science \hfill Cumulative GPA: 3.67/4.00 \\
+Bachelor of Science in Mathematics \hfill Honors Program
+
+% Experience Section
+\section*{EXPERIENCE}
+\noindent
+\textbf{\href{https://jacobyan0.github.io/}{UF Just\&Green Transportation Lab}} \hfill Gainesville, Florida\\ % Company name and location
+\textit{Research Assistant} \hfill January 2024 | Present% Position and duration
+\begin{itemize}
+    \item Supervisor: \href{https://www.essie.ufl.edu/people/name/xiang-yan/}{Dr. Xiang Yan}
+    \item Apply artificial intelligence and statistical models for transportation equity solutions
+\end{itemize}
+\textbf{University of Florida} \hfill Gainesville, Florida\\ % Company name and location
+\textit{Teaching Assistant} \hfill January 2024 | Present% Position and duration
+\begin{itemize}
+    \item COT3100 Applications of Discrete Structures
+    \item Lead discussion section and office hours, assist with grading and proctoring
+\end{itemize}
+\textbf{Computing Center for Social Good} \hfill Virtual\\ % Company name and location
+\textit{Intern} \hfill February 2021 | November 2021 % Position and duration
+\begin{itemize}
+    \item Develop solutions to medical, educational, and technological issues
+    \item Apply supervised, unsupervised, and reinforcement learning and develop neural networks
+    \item Learn collaborative skills and version control practices with Git
+\end{itemize}
+
+% Projects Section
+\section*{PROJECTS}
+\noindent
+\textbf{\href{https://github.com/heyuncle/graf}{gräf}} \hfill August 2021 | June 2022 \\
+\textit{Project Lead}
+\begin{itemize}
+     \item Software using Qt and Python that provides a GUI for math animation
+     \item Integration of open source animation library manim
+\end{itemize}
+\textbf{CCSG Natural Language Processing} \hfill October 2021 | November 2021 \\
+\textit{Project Lead}
+\begin{itemize}
+     \item Naive Bayes spelling correction using a noisy channel model
+     \item 90\% accuracy based on spelling error corpus
+\end{itemize}
+% TODO add DSA dictionary project?
+
+\section*{RELEVANT COURSEWORK}
+\begin{itemize}
+     \item MAD4202 Introduction to Combinatorics 2 \textit{(Spring 2024)}
+     \item MAS4301 Abstract Algebra \textit{(Spring 2024)}
+     \item COP3530 Data Structures and Algorithms \textit{(Fall 2023)}
+     \item MAS4105 Linear Algebra \textit{(Fall 2023)}
+     \item STA3032 Engineering Statistics \textit{(Fall 2023)}
+     \item COT3100 Applications of Discrete Structures \textit{(Spring 2023)}
+     \item MHF3202 Sets and Logic \textit{(Spring 2023)}
+ \end{itemize}
+
+% Skills Section
+\section*{SKILLS}
+\begin{itemize}
+    \item \textbf{Programming:} Python, Java, C++, R, MATLAB, \LaTeX
+    \item \textbf{Software:} Excel, ArcGIS
+    \item \textbf{Languages:} English (Native), Japanese (JLPT N2, CEFR B2)
+\end{itemize}
+
+% End document
+\end{document}
