@@ -44,7 +44,7 @@
     \begin{solution}
         We will define a matroid in terms of its independent sets, $\mathcal{M}_I$. We can define a greedy algorithm that finds a basis $B$ minimizing $w(B)$ by starting with $B=\varnothing $. We then construct $B$ by continually considering an element $a\in{S}$ with $a\notin{B}$ that minimizes $w(S)$. If $B\cup\{a\}\in{\mathcal{M}_I}$, then we add $a$ to $B$, and otherwise, we don't add $a$ and continue the algorithm. We claim that this is an optimal algorithm.
 
-        We will prove this by contradiction. Assume that the greedy algorithm gives a basis $B$, while the matroid has a basis $A$, where $w(B)>w(A)$. In question 3, it was proven that all matroid bases have the same cardinality, so let $|B|=|A|=n$. Enumerate the elements of $B$ as $b_1,b_2,\dots{},b_n$ and the elements of $A$ as $a_1,a_2,\dots{},a_n$ such that $w(b_1)\leq{w(b_1)}\leq\cdots\leq{w(b_n)}$ and $w(a_1)\leq{w(a_1)}\leq\cdots\leq{w(a_n)}$.
+        We will prove this by contradiction. Assume that the greedy algorithm gives a basis $B$, while the matroid has a basis $A$, where $w(B)>w(A)$. In question 3, it was proven that all matroid bases have the same cardinality, so let $|B|=|A|=n$. Enumerate the elements of $B$ as $b_1,b_2,\dots{},b_n$ and the elements of $A$ as $a_1,a_2,\dots{},a_n$ such that $w(b_1)\leq{w(b_2)}\leq\cdots\leq{w(b_n)}$ and $w(a_1)\leq{w(a_2)}\leq\cdots\leq{w(a_n)}$.
 
         Since $A$ must eventually reach a smaller weight than $B$, let $i$ be the smallest integer where $\sum_{j=1}^{i}{w(a_j)}<\sum_{j=1}^{i}{w(b_j)}$. We have $i>1$ since $w(b_1)$ is minimal over the whole matroid.
 
