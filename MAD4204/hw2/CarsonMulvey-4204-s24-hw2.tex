@@ -1,0 +1,68 @@
+\documentclass[11pt,letterpaper]{article}
+\usepackage{fullpage}
+\usepackage{multicol}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{graphicx, nicefrac}
+\usepackage{tikz, nicefrac}
+
+\newcommand{\ds}{\displaystyle}
+\newcommand{\bv}{\mathbf}
+\newcommand{\lv}{\langle}
+\newcommand{\rv}{\rangle}
+
+\newenvironment{solution}{\color{teal}\textit{Solution.}}{\color{black}}
+
+\begin{document}
+
+%%%Version 1%%%%
+
+\flushleft
+
+\begin{center}
+    \begin{large}
+        \textbf{Homework 2} \\
+        MAD4204 \\
+        Carson Mulvey
+    \end{large}
+\end{center}
+
+\pagestyle{empty}
+
+
+\flushleft
+
+\begin{enumerate}
+
+\item[2.]
+\begin{enumerate}
+\item A graph $G = (V,E)$ is \emph{factor critical} if $G - v$ has a perfect matching for every $v \in V$.
+Prove no bipartite graph is factor critical.
+
+\begin{solution}
+    We will prove by contradiction. Suppose that a bipartite graph $G = (A \sqcup B, E)$ is factor critical. Then, for arbitrary $a\in{A}$ and $b\in{B}$, $G-a$ and $G-b$ each have perfect matchings. Since a bipartite graph with a perfect matching must have equal cardinality between its disjoint sets, $G-a$ and $G-b$ give $|A|-1=|B|$ and $|A|=|B|-1$, respectively, which together form a contradiction. Thus, no bipartite graph is factor critical. \qedsymbol
+\end{solution}
+
+\item Let $G = (A \sqcup B, E)$ be a bipartite graph with $|A|= 10, |B| = 12$, $d(a) \leq 4$ for all $a \in A$ and $d(b) = 3$ for all $b \in B$.
+Prove that $G$ has a matching of size at least $9$.
+
+\end{enumerate}
+
+\item[3.] Fix $k,n \in \mathbb{N}$ with $k < n/2$.
+Let $G = (A \sqcup B, E)$ be the bipartite graph with
+\[
+A = \binom{[n]}{k}, \quad B = \binom{[n]}{k+1}, \quad E = \{(X,Y): X \in A, Y \in B, X \subseteq Y\}.
+\]
+Prove that $G$ contains a matching of size $\binom{n}{k} = |A|$.
+
+\textbf{Bonus point:} Construct a perfect matching on $G$.
+
+\begin{solution}
+    Using the result from Problem 1, we have a matching of $|A|$ elements iff $|N(S)|\geq{}|S|+|A|-|A|=|S|$ for all subsets $S\subseteq{A}$. An element $a\in{A}$ has $n-k$ elements to add to make an element in $B$, while an element $b\in{B}$ has $k+1$ elements to remove to make an element in $A$. However, $k<n/2$ implies $n-k\geq{}k+1$, so the degree of a vertex in $A$ is always greater than or equal to one in $B$. Thus $|N(S)|<|S|$ is impossible for any subset $S\subseteq{A}$, so we must have $|N(S)|\geq{}|S|$ as desired.
+\end{solution}
+
+\end{enumerate}
+
+\end{document}
