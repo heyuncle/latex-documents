@@ -1,0 +1,136 @@
+\documentclass[11pt,letterpaper]{article}
+\usepackage{fullpage}
+\usepackage{multicol}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx, nicefrac}
+\usepackage{tikz, nicefrac}
+
+\usetikzlibrary{graphs,graphs.standard}
+\tikzgraphsset{edges={draw,semithick}, nodes={circle,draw,semithick}}
+
+\newcommand{\ds}{\displaystyle}
+\newcommand{\bv}{\mathbf}
+\newcommand{\lv}{\langle}
+\newcommand{\rv}{\rangle}
+
+\newenvironment{solution}{\color{teal}\textit{Solution.}}{\color{black}}
+
+\begin{document}
+
+%%%Version 1%%%%
+
+\flushleft
+
+\begin{center}
+    \begin{large}
+        \textbf{Homework 2} \\
+        MAD4204 \\
+        Carson Mulvey
+    \end{large}
+\end{center}
+
+\pagestyle{empty}
+
+
+\begin{enumerate}
+
+\item 
+\begin{enumerate}
+	\item Show the Petersen graph is not planar.
+	
+	\begin{solution}
+		Enumerate the vertices as follows:
+	
+		\tikz \graph[math nodes, clockwise]
+		{
+			subgraph I_n [V={a_0,a_1,a_2,a_3,a_4}] --
+			subgraph C_n [V={a_5,a_6,a_7,a_8,a_9},radius=1.25cm];
+			{[cycle] a_0,a_2,a_4,a_1,a_3}
+		};
+
+		Constructing a minor by contracting the edges $(a_0,a_5)$, $(a_1,a_6)$, $(a_2,a_7)$, $(a_3,a_8)$, and $(a_4,a_9)$ results in $K_5$. Thus, by Kuratowski's Theorem, the Petersen graph is not planar.
+	\end{solution}
+
+	\item Find the Petersen graph's chromatic number.
+
+	\begin{solution}
+		Clearly a proper $1$-coloring is not possible. Using the same enumeration as in (a), we attempt to construct a proper $2$-coloring $\omega{}:\{a_i\}_{i=0}^9\rightarrow\{1,2\}$. WLOG, let $\omega(a_0)=1$. Then we must have $\omega(a_2)=\omega(a_3)=2$. This forces $\omega(a_1)=\omega(a_4)=1$. But since $a_1$ and $a_4$ are adjacent, this coloring would not be proper.
+
+		We can, however, find a proper $3$-coloring $\omega{}:\{a_i\}_{i=0}^9\rightarrow\{1,2,3\}$. One example is
+		\begin{align*}
+			\omega(a_0)=\omega(a_6)=\omega(a_8)=\omega(a_9) &= 1 \\
+			\omega(a_3)=\omega(a_4)=\omega(a_5)=\omega(a_7) &= 2 \\
+			\omega(a_1)=\omega(a_2) &= 3.
+		\end{align*}
+		Thus, the Petersen graph has chromatic number $3$.
+	\end{solution}
+
+	\item Let $G = (\binom{[5]}{2},E)$ where $(A,B) \in E$ if and only if $A \cap B \neq \varnothing$.
+	Determine the chromatic number of $G$.
+	For example, $(\{1,2\},\{2,4\}) \in E$ but $(\{1,2\},\{3,4\}) \notin E$. 
+	Is $G$ planar?\\
+
+	\begin{solution}
+		We will prove that $G$ is not planar by contradiction. Assume that $G$ is planar, and let $V=\binom{[5]}{2}$ so that $|V|=\binom{5}{2}=10$. Note that for any particular integer from $1$ to $5$, we have $4$ elements of $V$ containing that integer. Hence, for $\{a,b\}\in{V}$, $a$ is shared by $3$ other elements of $V$, and $b$ is shared by $3$ elements of $V$ (distinct from those sharing a). Thus for all $v\in{V}$, we have $\text{deg}(v)=6$. An edge is shared by two vertices, so $|E|=\frac{1}{2}\cdot{\text{deg}(v)\cdot |V|}=30$. By Euler's Theorem on planar graphs, we have $|F|=|E|-|V|+2=22$.
+
+		However, we also know that a face is composed of at least 3 edges, and an edge is shared by two faces. Thus $|E|\geq \frac{3}{2}|F|$. But $\frac{3}{2}|F|=33>30$. We have a contradiction, so $G$ cannot be planar.
+	\end{solution}
+
+\end{enumerate}
+	\item Prove for all connected simple planar graphs $G = (V,E)$ that $|E| \leq 3 \cdot |V| - 6$.
+	As a consequence, show that all simple planar graphs have a vertex of degree at most 5.
+
+	\begin{solution}
+		Since each face of a planar graph is comprised of at least 3 edges, and an edge is shared by two faces, we have $|F|\leq \frac{2}{3}|E|$. By Euler's Theorem, we have
+		\begin{align*}
+			|E|+2 &= |F|+|V| \\
+			&\leq{} \frac{2}{3}|E|+|V| \\
+			\Rightarrow \frac{1}{3}|E| &\leq |V|-2 \\
+			\Rightarrow |E| &\leq 3|V|-6.
+		\end{align*}
+		Assume a simple planar graph has vertices all with degree at least $6$. Then using the above inequality, we have
+		\begin{align*}
+			6|V| &\leq \sum_{v\in V}{\text{deg}(v)} \\
+			&= 2|E| \\
+			&\leq 6|V|-12
+		\end{align*}
+		which forms a contradiction. Thus, all simple planar graphs must have a vertex of degree at most $5$.
+	\end{solution}
+	
+	\item The \emph{dual} of a matroid $\mathcal{M}_B$ on ground set $S$ defined in terms of bases is
+	\[
+	\mathcal{M}^*_B = \{S \setminus B: B \in \mathcal{M}_B\}. 
+	\]
+	\begin{enumerate}
+	\item Prove that $\mathcal{M}^*_B$ is a matroid defined in terms of bases.
+	
+	\begin{solution}
+		Let there be $A,B\in{\mathcal{M}^*_B}$ and some $a\in{A}$. We need to show the exchange property, or the existence of some $b\in{B}$ where $(A\setminus\{a\})\cup\{b\}\in{\mathcal{M}^*_B}$. Let $A'= S \setminus A$ and $B'= S \setminus B$. Then $A',B'\in{\mathcal{M}_B}$. We then pick a particular $b\in{A'}$ so that $(A'\setminus\{b\})\cup\{a\}\in{\mathcal{M}_B}$. Since $S\setminus ((A'\setminus\{b\})\cup\{a\})$ is equivalent to $(A\setminus\{a\})\cup\{b\}$, we have $(A\setminus\{a\})\cup\{b\}\in{\mathcal{M}^*_B}$.
+	\end{solution}
+
+	\item Recall for $G$ a connected simple graph that $\mathcal{M}_B(G) = \{T$ a spanning tree of $G\}$ is a matroid.
+	For $G$ planar with dual graph $G^*$, prove $\mathcal{M}^*_B(G) = \mathcal{M}_B(G^*)$.
+	\end{enumerate}
+	
+	\item Let $k \in \mathbb{N}$ and define $\hat{p}_G(k) = (-1)^kp_G(k)$. Prove that $\hat{p}_G(k)$ is the number of compatible pairs $(\rho,c)$ where $c$ is a (not necessarily proper) $[k]$--coloring  of $G$ and $\rho$ is an acyclic orientation. In particular, show $\hat{p}_G(1)$ is the number of acyclic orientations of $G$.
+	
+	\begin{solution}
+		Using Equation (1) from the handout, we get
+		\begin{align*}
+			p_G(-k) &= p_{G-e}(-k)-p_{G/e}(-k) \\
+			\Rightarrow (-1)^n p_G(-k) &= (-1)^n p_{G-e}(-k)- (-1)^n p_{G/e}(-k) \\
+			\Rightarrow (-1)^n p_G(-k) &= (-1)^n p_{G-e}(-k)+(-1)^{n-1} p_{G/e}(-k) \\
+			\Rightarrow \hat{p}_G(k) &= \hat{p}_{G-e}(k)+\hat{p}_{G/e}(k),
+		\end{align*}
+		where $(-1)^{n-1} p_{G/e}(-k)=\hat{p}_{G/e}(k)$ because $G/e$ has $n-1$ vertices.
+
+		We describe a process for showing that a compatible pair $(\rho,c)$ follows the above relation with $\hat{p}_G(k)$. For a particular edge $e$, we have two cases. In one, $e$ completes a cycle in $G$, so $G-e$ adds a compatible pair. In the other, $G/e$ forms a cycle, which would remove a compatible pair.
+		
+		We have a bijection between compatible pairs in $G$ and in either $G-e$ or $G/e$. This follows the same relation as $\hat{p}_G(k)$, so $\hat{p}_G(k)$ would find the number of compatible pairs for a proper $[k]$-coloring.
+	\end{solution}
+	
+\end{enumerate}
+
+\end{document}
