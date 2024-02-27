@@ -1,0 +1,7 @@
+\beamer@sectionintoc {1}{Overview}{2}{0}{1}
+\beamer@sectionintoc {2}{2.3 Functions}{5}{0}{2}
+\beamer@sectionintoc {3}{2.4 Sequences and series}{11}{0}{3}
+\beamer@sectionintoc {4}{2.5 Cardinality of sets}{15}{0}{4}
+\beamer@sectionintoc {5}{3.1 Algorithms}{18}{0}{5}
+\beamer@sectionintoc {6}{3.2 Growth of functions}{24}{0}{6}
+\beamer@sectionintoc {7}{3.3 Complexity of algorithms}{34}{0}{7}
