@@ -1,0 +1,77 @@
+\documentclass[11pt,letterpaper]{article}
+\usepackage{fullpage}
+\usepackage{multicol}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{graphicx, nicefrac}
+\usepackage{tikz, nicefrac}
+
+\newenvironment{solution}{\color{blue}\textit{Solution.}}{\color{black}}
+
+\newcommand{\ds}{\displaystyle}
+\newcommand{\bv}{\mathbf}
+\newcommand{\lv}{\langle}
+\newcommand{\rv}{\rangle}
+
+\begin{document}
+
+%%%Version 1%%%%
+
+\flushleft
+
+\begin{center}
+    \begin{large}
+        \textbf{Homework 4} \\
+        MAD4204 \\
+        Carson Mulvey
+    \end{large}
+\end{center}
+
+\pagestyle{empty}
+
+
+\flushleft
+
+%Filling out the {\em online student data form} is worth an extra 4 points on this quiz.
+
+\begin{enumerate}
+
+
+
+\item For $P$ a finite poset, let $J(P)$ be the set of ideals in $P$ and $A(P)$ be the set of antichains.
+\begin{enumerate}
+	\item Find $\#J(P)$ and $\#A(P)$ for a chain. For an antichain.
+	\item Find $\#J(P)$ and $\#A(P)$ for $B_3$.
+	\item Must $\#J(P) = \#A(P)$? Why or why not? Explain.
+\end{enumerate}
+\begin{solution}
+	\begin{enumerate}
+		\item For chain $P$, all pairs of elements are comparable, so only singleton antichains exist (and the empty antichain). Thus $\#A(P)=\#P+1$.
+		
+		For an antichain $P$, all pairs of elements are incomparable, so any subset of $P$ is another antichain. Thus $\#A(P)=2^{\#P}$.
+		\item test
+	\end{enumerate}
+\end{solution}
+
+
+\item \begin{enumerate}
+\item For $P$ a poset with $n$ elements, prove $P$ contains a chain with at least $\sqrt{n}$ elements or an antichain with at least $\sqrt{n}$ elements.
+\item Prove Hall's theorem using Dilworth's theorem.
+\end{enumerate}
+
+\item For $P$ a finite poset, show the number of elements in a maximum chain equals the number of antichains in the smallest antichain cover.
+ 
+\item Let $M(n,k)$ be the multiset consisting of $k$ copies of each element in $[n]$.
+Let $P(n,k)$ be the poset on submultisets of $M(n,k)$ ordered by containment, e.g. 
+\[
+\{\{1,1,4\}\} \subseteq \{\{1,1,1,3,3,4,5,5\}\} \quad \mbox{but} \quad \{\{1,1,4\}\} \not\subseteq \{\{1,3,3,4,4\}\}.
+\]
+Find a general formula for $\mu_{P(n,k)}(x,y)$, and explain how it relates to Example 16.20.
+
+
+
+\end{enumerate}
+
+\end{document}
