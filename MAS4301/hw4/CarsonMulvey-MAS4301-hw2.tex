@@ -1,0 +1,100 @@
+\documentclass[11pt,letterpaper]{article}
+%\usepackage{fullpage}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{array}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{textcomp}
+
+\linespread{1.5}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Mod}[1]{\ (\mathrm{mod}\ #1)}
+
+\newenvironment{solution}{\color{blue}\textit{Solution.}}{\color{black}}
+
+\begin{document}
+\begin{center}
+    \begin{large}
+        \textbf{Homework 4} \\
+        MAS4301 \\
+        Carson Mulvey
+    \end{large}
+\end{center}
+
+\begin{enumerate}
+\item[\textbf{NB 4.1}] We claim that $\phi$ is an isomorphism. It suffices to show that $\phi$ is one-to-one, onto, and operation-preserving.
+    
+    (One-to-one) Let $\pi_a,\pi_b\in{\text{Perm}(A)}$ satisfy $\phi(\pi_a)=\phi(\pi_b)$. Then
+    \begin{align*}
+    f^{-1} \circ \pi_a \circ f &= f^{-1} \circ \pi_b \circ f \\
+    \implies (f \circ f^{-1}) \circ \pi_a \circ (f \circ f^{-1}) &= (f \circ f^{-1}) \circ \pi_b \circ (f \circ f^{-1}) \\
+    \implies \pi_a &= \pi_b,
+    \end{align*}
+    so $\phi$ is one-to-one.
+    
+    (Onto) Now let $\pi'\in{S_n}$. We must find a $\pi\in{\text{Perm}(A)$ such that $\phi(\pi)=\pi'$. If such a $\pi$ were to exist, then
+    \begin{align*}
+        f^{-1} \circ \pi \circ f &= \pi' \\
+        \implies (f \circ f^{-1}) \circ \pi \circ (f \circ f^{-1}) &= f \circ \pi' \circ f^{-1} \\
+        \implies \pi &= f \circ \pi' \circ f^{-1}.
+    \end{align*}
+    But we see that since $f$ maps from $\{1,2,\dots,n\}$ to $A$, it follows that  $f \circ \pi' \circ f^{-1} \in \text{Perm}(A)$. Thus, taking $\pi &= f \circ \pi' \circ f^{-1}$ as solved, we see that such a $\pi$ always exists.
+    
+    (Operation-preserving) Let $\pi_a$ and $\pi_b$ be in ${\text{Perm}(A)}$. Then
+    \begin{align*}
+    \phi(\pi_a\circ\pi_b) &= f^{-1} \circ \pi_a\circ\pi_b \circ f \\
+    &= f^{-1} \circ \pi_a \circ (f \circ f^{-1}) \circ \pi_b \circ f \\
+    &= (f^{-1} \circ \pi_a \circ f) \circ (f^{-1} \circ \pi_b \circ f) \\
+    &= \phi(\pi_a) \circ \phi(\pi_b),
+    \end{align*}
+    so $\phi$ is operation-preserving.
+    \qed
+    
+\item[\textbf{6.4}] We have $U(8)=\{1,3,5,7\}$ and $U(10)=\{1,3,7,9\}$. Noting that $U(10)=\{3^0,3^1,3^3,3^2\}=\langle 3 \rangle$, we see that $U(10)$ is cyclic.
+However, note that for $U(8)$,
+\begin{align*}
+    \langle 1 \rangle &= \{1\}, \\
+    \langle 3 \rangle &= \{1,3\}, \\
+    \langle 5 \rangle &= \{1,5\}, \\
+    \langle 7 \rangle &= \{1,7\}.
+\end{align*}
+Since none of the elements of $U(8)$ are generators, $U(8)$ is not cyclic. By Theorem 6.3, a cyclic and noncyclic group cannot be isomorphic, so $U(10)$ and $U(8)$ cannot be isomorphic.
+
+
+\item[\textbf{6.12}] Suppose that $\alpha(g)=g^{-1}$ for all $g\in{G}$ is an automorphism. Then for $f,g\in{G}$,
+\begin{align*}
+    fg &= \alpha((fg)^{-1}) \\
+    &= \alpha(g^{-1}f^{-1}) \\
+    &= \alpha(g^{-1})\alpha(f^{-1}) \\
+    &= gf,
+\end{align*}
+so $G$ is abelian.
+
+Now suppose that $G$ is abelian. Since $\alpha^2$ is an identity mapping, we have $\alpha^{-1}=\alpha$, so $\alpha$ is a bijection. Also, for $f$ and $g$ in $G$, we have
+\begin{align*}
+\alpha(fg) &= (fg)^{-1} \\
+&= g^{-1}f^{-1} \\
+&= f^{-1}g^{-1} \\
+&= \alpha(f)\alpha(g).
+\end{align*}
+We see that $\alpha$ is operation-preserving, so $\alpha$ is an automorphism. \qed
+
+\item[\textbf{6.32}] If $\phi(x)=9x \Mod{50}$, then $\phi$ is an automorphism. Note that $\phi(7)=63 \Mod{50} = 13$ holds.
+
+\item[\textbf{6.34}] We see that $\phi(k_1)$ and $\phi(k_2)$ are in $\phi(K)$ if $k_1,k_2\in{K}$. Then, by operation preservation of an isomorphism, we have $\phi(k_1)\phi(k_2)^{-1}=\phi(k_1k_2^{-1})$. Since $K$ is a subgroup, $K$ is closed under both inverses and the group operation in $G$, so $k_1k_2^{-1}\in{K}$. Thus $\phi(k_1)\phi(k_2)^{-1}$ is in $\bar{G}$. Then since $\phi(k_1)$ and $\phi(k_2)$ being in $\bar{G}$ implies that $\phi(k_1)\phi(k_2)^{-1}$ is in $\bar{G}$, by the One-Step Subgroup Test, $\phi(K)$ is a subgroup of $\bar{G}$. \qed
+
+\item[\textbf{6.42}] Because $\phi^2$ is an identity mapping, we have $\phi=\phi^{-1}$, so $\phi$ is a bijection. Also, for $(a_1,a_2,\dots,a_n)$ and $(b_1,b_2,\dots,b_n)$ in $\mathbb{R}^n$, we have
+\begin{align*}
+\phi((a_1,\dots,a_n)+(b_1,\dots,b_n)) &= \phi((a_1+b_1,\dots,a_n+b_n) \\
+&= (-a_1-b_1,\dots,-a_n-b_n) \\
+&= (-a_1,\dots,-a_n) + (-b_1,\dots,-b_n) \\
+&= \phi((a_1,a_2,\dots,a_n))+\phi((b_1,b_2,\dots,b_n)).
+\end{align*}
+We see that $\phi$ preserves componentwise addition, so $\phi$ is an automorphism. Geometrically, $\phi$ represents a reflection over the origin. In $\mathbb{R}^2$ particularly, that is equivalent to a rotation by $\pi$ radians. \qed
+
+\end{enumerate}
+
+\end{document}
