@@ -1,0 +1,46 @@
+\documentclass[11pt,letterpaper,dvipsnames]{article}
+\usepackage{fullpage}
+\usepackage{multicol}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{graphicx, nicefrac}
+\usepackage{tikz, nicefrac}
+
+\linespread{1.15}
+
+\newenvironment{solution}{\color{SeaGreen}\textit{Solution.}}{\color{black}}
+
+\newcommand{\ds}{\displaystyle}
+\newcommand{\bv}{\mathbf}
+\newcommand{\lv}{\langle}
+\newcommand{\rv}{\rangle}
+
+\begin{document}
+
+\begin{center}
+    \begin{large}
+        \textbf{Project Outline} \\
+        MAD4204 \\ 
+        Carson Mulvey
+    \end{large}
+\end{center}
+
+\pagestyle{empty}
+
+The goal of my project is to cover the combinatorial study of knowledge spaces from both a theory and application perspective. The theory of knowledge spaces was developed in the 80s and 90s primarily by Doignon and Falmagne as a mix of combinatorics and mathematical psychology. Since then, the field has been extensively researched and applied by the widely used website ALEKS, with its name coming from the \textbf{A}ssessment and \textbf{LE}arning in \textbf{K}nowledge \textbf{S}paces. The study of knowledge spaces currently helps online platforms like ALEKS teach subjects using methods that intend to teach students more effectively.
+
+In the theory of knowledge spaces, we represent a subject $S$ as a set of skills $Q$, and we let $\mathcal{K}\subseteq 2^Q$ be the feasible subsets of skills that a student could know at any point. The reason why I'm interested in this topic is because $(\mathcal{K},\subseteq)$ then becomes a poset, and $\mathcal{K}$ with certain restrictions applied can form either distributive lattices or antimatroids. This creates a close tie with our class content, and would allow for me to dive into the basics of antimatroid theory, as well as apply Birkhoff's theorem to knowledge spaces. For the active component, my plan is to program a simple demonstration of the ``querying experts'' algorithm, which uses a knowledge space to determine a student's current knowledge in a subject by asking an optimal number of questions. The program will show a visualization of a student's current knowledge state by displaying the corresponding distributive lattice or antimatroid, showing the connections to lattice or antimatroid theory as they apply. \\
+\textbf{Reading list:}
+\begin{enumerate}
+    \item \textbf{(Main text)} Jean-Paul Doignon, Jean-Claude Falmagne (2015). "Knowledge Spaces and Learning Spaces". arXiv:1511.06757
+    \item Doignon, J.-P.; Falmagne, J.-Cl. (1999), Knowledge Spaces, Springer-Verlag, ISBN 978-3-540-64501-6.
+    \item Falmagne, J.-Cl.; Albert, D.; Doble, C.; Eppstein, D.; Hu, X. (2013), Knowledge Spaces. Applications in Education, Springer.
+    \item Schrepp, M. (1999), "Extracting knowledge structures from observed data", British Journal of Mathematical and Statistical Psychology, 52 (2): 213–224, doi:10.1348/000711099159071
+    \item Cosyn, E., and Uzun, H.B. 2009. Note on two necessary and sufficient axioms for a well-graded knowledge space. Journal of Mathematical Psychology, 53, 40–42.
+    \item Korte, Bernhard; Lovász, László; Schrader, Rainer (1991), Greedoids, Springer-Verlag, pp. 19–43, ISBN 3-540-18190-3
+    \item Boyd, E. Andrew; Faigle, Ulrich (1990), "An algorithmic characterization of antimatroids", Discrete Applied Mathematics, 28 (3): 197–205, doi:10.1016/0166-218X(90)90002-T
+\end{enumerate}
+
+\end{document}
