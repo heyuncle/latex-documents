@@ -1,0 +1,53 @@
+\documentclass[11pt,letterpaper]{article}
+\usepackage{fullpage}
+\usepackage{multicol}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{graphicx, nicefrac}
+\usepackage{tikz, nicefrac}
+
+\newenvironment{solution}{\color{blue}\textit{Solution.}}{\color{black}}
+
+\newcommand{\ds}{\displaystyle}
+\newcommand{\bv}{\mathbf}
+\newcommand{\lv}{\langle}
+\newcommand{\rv}{\rangle}
+
+\begin{document}
+
+%%%Version 1%%%%
+
+\flushleft
+
+\begin{center}
+    \begin{large}
+        \textbf{Homework 4 Revisions} \\
+        MAD4204 \\
+        Carson Mulvey
+    \end{large}
+\end{center}
+
+\pagestyle{empty}
+
+
+\flushleft
+
+%Filling out the {\em online student data form} is worth an extra 4 points on this quiz.
+
+\begin{enumerate}
+	\item[3.] For $P$ a finite poset, show the number of elements in a maximum chain equals the number of antichains in the smallest antichain cover.
+
+	\begin{solution}
+		Let the \textit{height} of $y\in P$ be the maximum length of a saturated chain
+		\[
+			x\lessdot p_1 \lessdot p_2 \lessdot \cdots \lessdot y,
+		\]
+		with $x$ a minimal element of $P$. Then let $A_i$ be the set of elements of height $i$. We claim that for any $1\leq i\leq h$, $A_i$ is an antichain. Indeed, note that if $x,y\in A_i$ have $x<y$, then we can extend the chain of length $i$ ending at $x$ instead to end at $y$. This means that the height of $y$ must be greater than $i$, so $y\notin{A_i}$, forming a contradiction.
+		
+		Now let $C$ be a maximal chain of size $h$. Then since $h$ is also the largest height of any element in $P$, we see that $\bigcup_{i=1}^h{A_h}$ is an antichain cover of size $n$. Additionally, if an antichain cover of size $g<h$ were to exist, then some antichain must contain at least $2$ distict elements in $C$, since $|C|=h$. However, these two elements would be comparable, forming a contradiction. Thus, the smallest antichain cover has size $h$.
+	\end{solution}
+\end{enumerate}
+
+\end{document}
