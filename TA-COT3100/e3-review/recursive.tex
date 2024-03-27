@@ -1,0 +1,103 @@
+\documentclass[11pt,letterpaper,dvipsnames]{article}
+%\usepackage{fullpage}
+\usepackage{multicol}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{listings}
+\usepackage{graphicx, nicefrac}
+\usepackage{tikz, nicefrac}
+\usepackage{setspace}
+
+\begin{document}
+\setstretch{1.15}
+
+\begin{center}
+    \begin{large}
+        \textbf{Recursive algorithms and their complexities} \\
+        Carson Mulvey
+    \end{large}
+\end{center}
+
+When it comes to recursive algorithms, it can be difficult to figure out time complexity. Consider the following basic example:
+\begin{lstlisting}[language=Python]    
+def procedure1(n):
+    if (n == 1):
+        return 1
+    else:
+        return procedure1(n-1) + 1
+\end{lstlisting}
+
+It helps to first understand what the procedure actually does. See that each output of \texttt{procedure1} is 1 plus the previous output, \texttt{procedure1(1)} returning 1. That is, \texttt{procedure1(2)} returns 2, \texttt{procedure1(2)} returns 3, et cetera. Therefore, we know that \texttt{procedure1(n)} returns $n$.
+
+Now let's find the time complexity. See how the function first tests if $n=1$, which is constant time, or $O(1)$. When $n\neq 1$, we call \texttt{procedure1} with the previous $n$, and add 1 to that result. Thus, ignoring the recursive call, our procedure is $O(1)$.
+
+Now lets see how many times the procedure is called. We see that \texttt{procedure1(n)} calls \texttt{procedure1(n-1)}, which then calls \texttt{procedure1(n-2)}, and so on, until we arrive at \texttt{procedure1(1)}. Because of this, we end up with $n$ procedure calls, each of which are $O(1)$. Therefore, our time complexity is $O(n\cdot 1)=O(n)$.
+
+Let's take another example:
+\begin{lstlisting}[language=Python]    
+def procedure2(n):
+    if (n == 0):
+        return 1
+    elif (n == 1):
+        return 2
+    else:
+        return procedure2(n-2) * 4
+\end{lstlisting}
+
+Note how this algorithm uses $n-2$ instead of $n-1$ in the recursive definition. In the algorithm, we multiply the second-previous term by 4, which overall leads to \texttt{procedure2(n)} outputting $2^n$ (try out numbers to see this yourself!).
+
+Now for time complexity. Like before, everything besides the recursive call is $O(1)$. Then since \texttt{procedure2(n)} calls \texttt{procedure2(n-2)}, which then calls \texttt{procedure2(n-4)}, and so on, until we arrive at \texttt{procedure1(1)} or \texttt{procedure1(0)}. Since we decrease by 2 each time, this will be about $n/2$ calls. Thus, the complexity is $O(n/2\cdot 1)=O(n)$.
+
+See how the complexity is $O(n)$ for both \texttt{procedure1} and \texttt{procedure2}! This applies to any simple\footnote{By simple, I mean that the procedure recursively calls itself once, with the rest of the function running in constant time} recursion where $n$ calls $n-c$ for some positive integer $c$ and calls nothing else.
+
+Here's another example:
+\begin{lstlisting}[language=Python]    
+def procedure3(n):
+    if (n == 0):
+        return 0
+    else:
+        return procedure3(n//2) + 1
+\end{lstlisting}
+
+First note that ignoring recursion, a call of the procedure is $O(1)$. Each procedure recursively calls itself with half the input (with floor division). For example, \texttt{procedure3(20)} calls \texttt{procedure3(10)}, which calls \\\texttt{procedure3(5)}, then \texttt{procedure3(2)}, then \texttt{procedure3(1)}, and finally \texttt{procedure3(0)}. Noting that the `amount of times $n$ can be divided by 2 before reaching 0' is about $\log_2{n}$, we conclude that the procedure is $O(\log n)$. This applies to any simple recursion where $n$ calls $n/c$ for some positive integer $c$.
+
+\newpage
+Onto the next example:
+\begin{lstlisting}[language=Python]    
+def procedure4(n):
+    sum = 0
+    for i in range(n):
+        sum += 1
+    if (n == 0):
+        return 0
+    else:
+        return procedure4(n-1) + sum
+\end{lstlisting}
+
+Analyzing this algorithm, we see that there is a for loop with $O(n)$ time complexity. Thus, ignoring the recursion, \texttt{procedure4} has linear time complexity. Because the procedure calls the previous term, there will be a total of $n$ calls. Thus, our time complexity is $O(n\cdot n)=O(n^2)$.
+
+In general, if a recursive function has a $O(f(n))$ complexity \textit{besides} the recursive call, then $f(n)$ is multiplied to the amount of calls that occur.
+
+\vspace{5mm}
+\textbf{Note: The rest of this document is beyond course content}
+
+In our discussion, we covered Problem 5.4.29, which had the following solution:
+\begin{lstlisting}[language=Python]    
+def a(n):
+    if (n == 0):
+        return 1
+    elif (n == 1):
+        return 2
+    else:
+        return a(n-1) * a(n-2)
+\end{lstlisting}
+
+I stated in class that at first glance, the time complexity looked like $O(n^2)$, but this was \textit{wrong}!
+
+A key difference between \texttt{a} and the previous algorithms is that \textit{multiple} recursive calls are being made. To figure out how many calls are made, we'll let $\text{calls}(n)$ be the number of total function calls for \texttt{a(n)}. Then since \texttt{a(0)} and \texttt{a(1)} are base cases, $\text{calls}(0)=\text{calls}(1)=1$. Also, because \texttt{a(n)} calls \texttt{a(n-1)} and \texttt{a(n-2)}, we have $\text{calls}(n)=\text{calls}(n-1)+\text{calls}(n-2)$ (looks familiar?).
+
+Because of this, we actually get $\text{calls}(n)=\text{fib}_{n+1}$, and because the rest of the algorithm is constant, that gives a time complexity of $O(\text{fib}_n)$. The explicit formula for the fibonacci numbers is not required knowledge for this class, but using it, we can also write the complexity as $O(\varphi^n)$, where $\varphi \approx 1.61803$ is the golden ratio. Pretty neat!
+
+\end{document}

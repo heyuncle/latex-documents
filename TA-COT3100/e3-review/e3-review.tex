@@ -1,0 +1,258 @@
+\documentclass[dvipsnames,t]{beamer}
+\usepackage{listings}
+
+\usetheme{Madrid}
+\usecolortheme[named=MidnightBlue]{structure}
+\author{Carson Mulvey}
+\title{COT3100 Exam 3 review}
+\date{Mar 26, 2024}
+
+\newcommand{\Mod}[1]{\ (\mathrm{mod}\ #1)}
+
+
+\begin{document}
+
+\frame{\titlepage}
+
+\AtBeginSection[]
+{
+\begin{frame}
+\frametitle{Topics}
+\tableofcontents[currentsection]
+\end{frame}
+}
+
+\section{Overview}
+
+\begin{frame}{Exam details}
+\begin{itemize}
+	\item Time: Thursday, March 28th, 8:20 to 10:20 PM
+	\item Topics:
+	\begin{itemize}
+		\item 3.1 to 3.3
+		\item 4.1 to 4.3; 4.6
+            \item 5.1 to 5.4
+	\end{itemize}
+	\item Things to bring:
+	\begin{itemize}
+		\item Writing utensils
+		\item Handwritten reference sheet (8.5x11)
+		\item \textbf{4 function} calculator
+		\item ID (UF ID, state ID, or ID on phone)
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+\section{Chapter 3: Algorithms (review)}
+
+\begin{frame}{Complexity review}
+\begin{columns}
+\begin{column}{0.5\textwidth}
+    Search algorithms:
+    \begin{itemize}
+    \item Linear search - $O(n)$
+    \item Binary search - $O(\log_2{n})$
+    \end{itemize}
+\end{column}
+\begin{column}{0.5\textwidth}  %%<--- here
+    Sorting algorithms:
+    \begin{itemize}
+    \item Bubble sort - $O(n^2)$
+    \item Selection sort - $O(n^2)$
+    \item Insertion sort - $O(n^2)$
+    \item \alert{Merge sort - $O(n\log{n})$}
+    \item \alert{Quick sort - $O(n\log{n})$ \\
+    (worst case $O(n^2))$}
+    \end{itemize}
+\end{column}
+\end{columns}
+
+\begin{block}{Note}
+The following order represents the growth rates of functions from slowest to fastest:
+\begin{align*}
+1 \ll \log{n} \ll n \ll n\log{n} \ll n^2 \ll \text{(polynomials)} \ll 2^n \ll n! \ll n^n
+\end{align*}
+\end{block}
+\alert{*new algorithms, be sure to review!}
+\end{frame}
+
+\begin{frame}{Big $O$, big $\Omega$, and big $\Theta$}
+\begin{block}{Definition}
+	A function $f(x)$ is $O(g(x))$ if there are $C$ and $k$ such that for all $x>k$,
+	\begin{align*}
+	|f(x)| \leq C|g(x)|.
+	\end{align*}
+\end{block}
+\begin{block}{Definition}
+	A function $f(x)$ is $\Omega(g(x))$ if there are $C$ and $k$ such that for all $x>k$,
+	\begin{align*}
+	|f(x)| \geq C|g(x)|.
+	\end{align*}
+\end{block}
+\begin{block}{Definition}
+	A function $f(x)$ is $\Theta(g(x))$ if it is both $O(g(x))$ and $\Omega(g(x))$
+\end{block}
+Remember that big $O$ is an \textbf{upper bound}, big $\Omega$ is a \textbf{lower bound}, and $\Theta$ is grows at the \textbf{same rate} (asymptotically).
+\end{frame}
+
+\begin{frame}{Practice}
+\begin{block}{Problem}
+For $f(n)=4n^3+\log(n^3)$, prove that $f(n)$ is $\Theta(n^3)$.
+\end{block}
+\end{frame}
+
+\begin{frame}{Practice}
+\begin{block}{Problem}
+Find the optimal big $O$ for the following functions:
+\begin{itemize}
+    \item $f(x)=x^2+\log_{2024}(x^{2024})$
+    \item $g(x)=2^{2024!}$
+    \item $h(x)=2024^x+x!$
+\end{itemize}
+\end{block}
+\end{frame}
+
+\section{Chapter 4: Number theory and cryptography}
+\begin{frame}{Number bases}
+Skills to know:
+\begin{itemize}
+    \item Convert from decimal to another base
+    \item Convert from another base to decimal
+    \item \textbf{Convert between bases of similar powers*}
+    \item Adding and multiplying within a base
+\end{itemize}
+\begin{block}{*Note}
+We can convert between non-decimal bases easily if one they share the same primes. For example, from binary to hexadecimal, because $2^\mathbf{4}=16$, we group by 4s. For example:
+\[
+(\color{red}1001\hspace{1mm} 
+\color{PineGreen}0101\hspace{1mm} 
+\color{Plum}0111 \hspace{1mm} 
+\color{Sepia}1010\color{black})_2 = (\color{red}9\color{PineGreen}5\color{Plum}7\color{Sepia}A\color{black})_{16}
+\]
+\end{block}
+\end{frame}
+
+\begin{frame}{Practice}
+\begin{block}{Problem}
+Convert $(1110 1010)_2$ to decimal and hexadecimal. Then go backwards to verify your work.
+\end{block}
+\end{frame}
+\begin{frame}{Practice}
+\begin{block}{Problem}
+Find $(1010)_2\cdot (110)_2$ without converting to decimal.
+\end{block}
+\end{frame}
+
+\begin{frame}{Division and modular arithmetic}
+Skills to know:
+\begin{itemize}
+    \item Division algorithm
+    \item Divides (`$\mid$')
+    \item Basic modular arithmetic
+\end{itemize}
+\end{frame}
+\begin{frame}{Practice}
+\begin{block}{Problem}
+Find the quotient and remainder of the following:
+\begin{itemize}
+    \item $23\div 5$
+    \item $-15\div 4$
+    \item $0 \div 3$
+\end{itemize}
+\end{block}
+\end{frame}
+\begin{frame}{Practice}
+\begin{block}{Problem}
+Show that $a|b$ is equivalent to $b \equiv 0 \Mod{a}$.
+\end{block}
+\end{frame}
+\begin{frame}{Practice}
+\begin{block}{Problem}
+Prove that if $a \equiv b \Mod{n}$ and $c \equiv d \Mod{n}$, then $ac \equiv bd \Mod{n}$.
+\end{block}
+\end{frame}
+
+\begin{frame}{Factorization and primes}
+Skills to know:
+\begin{itemize}
+    \item Definitions: prime and relatively prime
+    \item Prime factorization
+    \item gcf and lcm
+    \item Euclidian algorithm
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Practice}
+\begin{block}{Problem}
+Find the prime factorizations of 228 and 126. Then find $\text{gcd}(228,126)$ and $\text{lcm}(228,126)$. Are 228 and 126 relatively prime? Finally, verify your answer to $\text{gcd}(228,126)$ using the Euclidian algorithm.
+\end{block}
+\end{frame}
+
+\section{Chapter 5: Induction and recursion}
+\begin{frame}{Induction and strong induction}
+Skills to know:
+\begin{itemize}
+    \item Writing a proof by induction
+    \item Writing a proof by strong induction
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Recursion}
+Skills to know:
+\begin{itemize}
+    \item Understanding a recursive definition
+    \item Proving an explicit form by induction
+    \item Coding a recursive solution to a problem
+    \item Analyzing time complexity of a recursive algorithm (see handout)
+\end{itemize}
+\end{frame}
+
+% \begin{frame}{Merge sort code}
+% \begin{lstlisting}
+% def mergeSort(arr):
+%     if len(arr) > 1:
+%         mid = len(arr)//2
+%         L = arr[:mid]
+%         R = arr[mid:]
+%         mergeSort(L)
+%         mergeSort(R)
+%         i = j = k = 0
+%         while i < len(L) and j < len(R):
+%             if L[i] <= R[j]:
+%                 arr[k] = L[i]
+%                 i += 1
+%             else:
+%                 arr[k] = R[j]
+%                 j += 1
+%             k += 1
+%         while i < len(L):
+%             arr[k] = L[i]
+%             i += 1
+%             k += 1
+%         while j < len(R):
+%             arr[k] = R[j]
+%             j += 1
+%             k += 1
+% \end{lstlisting}
+% \end{frame}
+
+\begin{frame}{Practice}
+\begin{block}{Problem}
+Code an algorithm \textt{min} that finds the minimum element of $a_1,a_2,\dots,a_n$ recursively using the first $n-1$ elements.
+\end{block}
+\end{frame}
+
+\begin{frame}{Practice (harder)}
+\begin{block}{Problem}
+Let $\text{pyr}(n)$ be a function taking a positive integer that finds the amount of triangles in a 2D pyramid of height $n$ made of equilateral triangles.
+\begin{enumerate}
+    \item Find a recursive definition.
+    \item Code a recursive algorithm \textt{pyr(n)} that finds $\text{pyr}(n)$
+    \item Find $\text{pyr}(1)$, $\text{pyr}(2)$, and $\text{pyr}(3)$. Conjecture an explicit formula.
+    \item Prove your explicit formula by induction.
+
+\end{enumerate}
+\end{block}
+\end{frame}
+
+\end{document}
