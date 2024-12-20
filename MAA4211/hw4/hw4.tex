@@ -1,0 +1,61 @@
+\documentclass[11pt,letterpaper]{article}
+\usepackage{fullpage}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{array}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{textcomp}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+
+\newenvironment{solution}{\color{blue}\textit{Solution.}}{\color{black}}
+
+\begin{document}
+\begin{center}
+    \begin{large}
+        \textbf{Assignment 4} \\
+        MAA4211 \\
+        Carson Mulvey
+    \end{large}
+\end{center}
+
+\begin{enumerate}
+    \item[\textbf{(Graded) 2.2.6.}] Let $(a_n)$ be a sequence that converges to $a$ and converges to $b$. Now, let $\epsilon>0$. There must exist an $N_1$ such that for all $n\geq N_1$, we have $|a_n-a| < \epsilon/2$. There must also exist an $N_2$ such that for all $n \geq N_2$, we have $|a_n-b| < \epsilon/2$. Then, for all $n \geq \max\{N_1,N_2\}$,
+    \begin{align*}
+        |a-b| &= |a-b+a_n-a_n| \\
+        &\leq |a_n-a| + |a_n-b| \qquad\text{(triangle inequality)}
+        \\ 
+        &< \epsilon/2 + \epsilon/2 = \epsilon.
+    \end{align*}
+    However, this implies that $|a-b|<\epsilon$ for all $\epsilon>0$. By Theorem 1.2.6 from the book, this shows that $a=b$. \qed
+
+    \item[\textbf{2.5.1.}]
+\begin{enumerate}
+    \item Let $(a_n)$ be a sequence with a bounded subsequence $(a_{n_1},a_{n_2},\dots)$. By the Bolzano--Weierstrass Theorem, $(a_{n_1},a_{n_2},\dots)$ must itself have a convergent subsequence. However, this convergent subsequence is transitively also a subsequence of $(a_n)$, hence making (a) impossible.
+
+    \item Let $(a_n)$ be a sequence such that
+    \[
+        a_k = (-1)^{k}\left(\frac{k-1}{2k}\right)+\frac{1}{2}.
+    \]
+    Then the subsequence $(a_1,a_3,a_5,\dots)$ converges to 0, while $(a_2,a_4,a_6,\dots)$ converges to 1. Additionally, all $a_k$ are in the open interval $(0,1)$, so this sequence satisfies (b).
+
+    \item Let $(a_n)$ be a sequence such that 
+    \[
+        a_k = \prod_{i=1}^\infty \frac{p_{i}^{m_{i}-1}-1}{p_{i}^{m_{i}}},
+    \]
+    where $p_1^{m_1}p_2^{m_2}\cdots$ is the unique prime factorization of $k$. We note that $(p^{i(m-1)}-1)/{p^{im}}$ as a sequence indexed by $i$ converges to $1/p^m$.
+
+    \item Let $(a_n)$ have subsequences converging to each element of $\{1/i : i\in\N\}$. We claim that such an $(a_n)$ must converge to 0.
+    Note: I could not find justification. Below is my attempted proof.
+
+    \color{lightgray}Let $\epsilon>\epsilon' > 0$. For a subsequence converging to some $1/i$, we know that there exists an $N_i$ such that all natural numbers $n\geq N_i$ \textit{whose indices are in the subsequence} must satisfy $|a_n-1/i|<\epsilon'=\epsilon+1/k$. We now pick large enough $k$ so that $\max\{N_1,N_2,\dots,N_k\}$... :(\color{black}
+\end{enumerate}
+\item[] 
+
+
+\end{enumerate}
+
+\end{document}

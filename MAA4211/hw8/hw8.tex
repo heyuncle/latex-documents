@@ -1,0 +1,54 @@
+\documentclass[11pt,letterpaper]{article}
+\usepackage{fullpage}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{array}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{textcomp}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+
+\newenvironment{solution}{\color{blue}\textit{Solution.}}{\color{black}}
+
+\begin{document}
+\begin{center}
+    \begin{large}
+        \textbf{Assignment 8} \\
+        MAA4211 \\
+        Carson Mulvey
+    \end{large}
+\end{center}
+
+\begin{enumerate}
+    \item[\textbf{(Graded) 4.4.9.}]
+        \begin{enumerate}
+            \item Let $\epsilon > 0$. Since $f$ is Lipschitz, there exists $M$ such that
+            \begin{align*}
+                \frac{|f(x)-f(y)|}{|x-y|} &\leq M \\
+                \implies |f(x)-f(y)| &\leq M|x-y|
+            \end{align*}
+            for all $x \neq y \in A$. Choosing $\delta = \epsilon / M$, we see that $|x-y|<\delta$ implies
+            \[
+                |f(x)-f(y)| \leq M|x-y| < M \cdot \frac{\epsilon}{M} = \epsilon
+            \]
+            for $x \neq y \in A$. When $x=y$, $|x-y|=0<\delta$ clearly implies $|f(x)-f(y)|=0<\epsilon$. Thus, $f$ is uniformly continuous on $A$.
+            
+            \item The converse is false. Consider $f(x)=\sqrt{x}$ over the domain $[0,\infty)$ (Exercise 4.4.7.). We see that $f$ is continuous on $[0,1]$, a compact set, so $f|_{[0,1]}$ is uniformly continuous. Additionally, for all $x\neq y \in [1,\infty)$, we have
+            \begin{align*}
+                \frac{|f(x)-f(y)|}{|x-y|} = \frac{|\sqrt{x}-\sqrt{y}|}{|(\sqrt{x}-\sqrt{y})(\sqrt{x}+\sqrt{y})|} = \frac{1}{\sqrt{x}+\sqrt{y}} \leq \frac{1}{2},
+            \end{align*}
+            making $f|_{[1,\infty)}$ Lipschitz, and hence uniformly continuous by (a). Thus, $f$ is uniformly continuous.
+            
+            Now let $M>0$. Taking $x=\frac{1}{4M^2}$, $y=\frac{1}{16M^2}$, we have $x\neq y \in [0,\infty)$ and
+            \begin{align*}
+                \frac{|f(x)-f(y)|}{|x-y|} = \frac{\left|\frac{1}{2M}-\frac{1}{4M}\right|}{\left|\frac{1}{4M^2}-\frac{1}{16M^2}\right|} = \frac{\left|\frac{1}{4M}\right|}{\left|\frac{3}{16M^2}\right|} = \frac{4}{3}|M| > M.
+            \end{align*}
+            Thus, no upper bound $M$ for the slope of $f$ can exist, making $f$ not Lipshitz. Thus, $f$ is a counterexample to the converse of (a).
+        \end{enumerate}
+\end{enumerate}
+
+
+\end{document}

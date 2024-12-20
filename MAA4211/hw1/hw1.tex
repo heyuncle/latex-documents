@@ -1,0 +1,73 @@
+\documentclass[11pt,letterpaper]{article}
+\usepackage{fullpage}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{array}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{textcomp}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+
+\newenvironment{solution}{\color{blue}\textit{Solution.}}{\color{black}}
+
+\begin{document}
+\begin{center}
+    \begin{large}
+        \textbf{Assignment 1} \\
+        MAA4211 \\
+        Carson Mulvey
+    \end{large}
+\end{center}
+
+\begin{enumerate}
+\item[\textbf{1.3.1.}]
+    \begin{enumerate}
+        \item A real number $s$ is the \textit{greatest lower bound}, or \textit{infimum}, for a set $A \subseteq \R$ if:
+        \begin{enumerate}
+            \item $s$ is a lower bound for $A$;
+            \item if $b$ is a lower bound for $A$, then $b \leq s$.
+        \end{enumerate}
+        \item \textbf{Lemma.} \textit{Assume $s \in \R$ is an lower bound for a set $A \subseteq \R$. Then, $s = \inf A$ if and only if, for every choice of $\epsilon > 0$, there exists an element $a \in A$ satisfying $s + \epsilon > a$.}
+        
+        \textit{Proof.} ($\Rightarrow$) Assume that $s = \inf A$. Let $\epsilon>0$, and consider $s+\epsilon$. Because $s+\epsilon > s$, we know that $s+\epsilon$ is not a lower bound for $A$. This means that there exists an element $a\in A$ such that $s+\epsilon > a$.
+
+        ($\Leftarrow$) Now assume $s$ is a lower bound such that for all $\epsilon > 0$, there is $a\in A$ satisfying $s+\epsilon > a$. This means that $s+\epsilon$ cannot a lower bound for $A$ for any $\epsilon > 0$. Now let $b$ be an arbitrary real number greater than $s$. Taking $\epsilon = b-s > 0$, we see that $s+\epsilon = s + (b-s) = b$. Thus, any $b$ greater than $s$ cannot be a lower bound for $A$. Hence, $s$ is the infimum of $A$.
+        \qed
+    \end{enumerate}
+
+\item[\textbf{1.3.4.}]
+\begin{enumerate}
+    \item When taking the union of two nonempty sets, each bounded above, the supremum will be the largest of the two supremums. In other terms,
+    \[
+        \sup(A_1 \cup A_2) = \max \{\sup A_1, \sup A_2\}.
+    \]
+    Similarly, for $n\in \N$,
+    \[
+        \sup \left( \bigcup_{k=1}^n A_k \right) = \max \left( \bigcup_{k=1}^n \{\sup A_k\} \right).
+    \]
+    \item Not always. Consider a collection $\{A_k\}_{k=1}^\infty$, where $\sup A_k = k$. Now take some $a \in \mathbb{R}$. We can choose an integer $k > a$, and because $\sup A_k = k$, there must exist an element $b\in A_k$ such that $a < b \leq k$. Thus, when considering
+    \[
+        \sup\left(\bigcup_{k=1}^\infty A_k\right),
+    \]
+    no real number $a$ can be an upper bound, as a larger element $b$ will always exist, and hence the supremum does not exist. This gives a counterexample where the formula in (a) does not work in the infinite case.
+\end{enumerate}
+
+\item[1.4.2.] We first need to show that $s$ is an upper bound of $A$. Consider arbitrary $a>s$. We can choose a sufficiently large integer $n$ such that $s < s+\frac{1}{n} < a$. We are given that $s+\frac{1}{n}$ is an upper bound of $A$, but that makes $a$ greater than an upper bound of $A$, so $a\notin A$. Because no $a>s$ can be in $A$, $s$ is an upper bound of $A$.
+
+We now need to show that there is no upper bound less than $s$. Consider arbitrary $b<s$. Then, we can pick a sufficiently large integer $n$ such that $b < s - \frac{1}{n} < s$. However, we are given that $s - \frac{1}{n}$ is not an upper bound. Thus, there must exist some element $c\in A$ that is greater than $s - \frac{1}{n}$, which implies $c>b$. Hence $b$ cannot be an upper bound. Because $s$ is an upper bound of $A$ and no $b<s$ can be an upper bound of $A$, we have shown that $\sup A = s$. \qed
+\item[1.4.8.]
+    \begin{enumerate}
+        \item[(b)] Consider the sequence $J_1 \supseteq J_2 \supseteq J_3 \supseteq \cdots$, where $J_n = \left( -\frac{1}{n}, \frac{1}{n} \right)$. We note that $0\in{J_i}$ for all $i\in \N$. Then
+        \[\bigcap_{n=1}^\infty J_n = \{0\}.\]
+        This is because for any positive $a$, we can pick a sufficiently large $n$ for which $a > \frac{1}{n}$, which implies that $a\notin J_n$. For any negative $a$, we can pick $n$ where $a < -\frac{1}{n}$, in which case $a\notin J_n$.
+        \item[(c)] Consider the sequence $L_1 \supseteq L_2 \supseteq L_3 \supseteq \cdots$, where $L_n = [n, \infty)$. Then
+        \[\bigcap_{n=1}^\infty L_n = \varnothing,\]
+        since for any real $a$, we can pick an integer $n>a$, in which case $a\notin L_n$.
+    \end{enumerate}
+
+\end{enumerate}
+
+\end{document}

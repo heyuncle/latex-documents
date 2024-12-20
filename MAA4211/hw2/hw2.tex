@@ -1,0 +1,124 @@
+\documentclass[11pt,letterpaper]{article}
+\usepackage{fullpage}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{array}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{textcomp}
+\usepackage{pgfplots}
+\usetikzlibrary{calc}
+
+\pgfmathdeclarefunction{MyFunction}{1}{%
+  \pgfmathparse{%
+    (and(   1,    #1<1/2)*(#1 - 1 + 3/2)            +%
+    (and(#1>= 1/2,  #1< 3/4)*(#1 - 1 + 3/4)   +%
+    (and(#1>= 3/4,  #1< 7/8)*(#1 - 1 + 3/8)          +%
+    (and(#1>= 7/8,  #1< 15/16)*(#1 - 1 + 3/16) +%
+    (and(#1>= 15/16, #1< 31/32)*(#1 - 1 + 3/32) %
+    }%
+}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+
+\newenvironment{solution}{\color{blue}\textit{Solution.}}{\color{black}}
+
+\begin{document}
+\begin{center}
+    \begin{large}
+        \textbf{Assignment 2} \\
+        MAA4211 \\
+        Carson Mulvey
+    \end{large}
+\end{center}
+
+\begin{enumerate}
+\item[\textbf{1.5.4.}]
+\begin{enumerate}
+    \item We are given that $(-1,1) \sim \R$ in Example 1.5.4. Using the fact that $\sim$ is an equivalence relation, it suffices to show that $(a,b) \sim (-1,1)$. Consider the function $f \colon (a,b) \to (-1,1)$ defined by
+    \[
+        f(x) = \frac{2x-a-b}{b-a}.
+    \]
+    We see that $f'(x)=2/(b-a)>0$, making $f$ monotonically increasing, so $f$ is one-to-one. Also, taking some $y \in (-1,1)$, we see that
+    \[
+        f\left(\frac{(b-a)y+a+b}{2}\right)=y,
+    \]
+    with $((b-a)y+a+b)/2 \in (a,b)$. This makes $f$ onto, and hence also a one-to-one correspondence. Thus, $(a,b) \sim (-1,1)$, and transitively, $(a,b) \sim \R$, as desired. \qed
+
+    \item Consider the function $g \colon (a,\infty) \to \R$ defined by $g(x) = \ln(x-a)$. Then $g'(x)=1/(x-a)>0$ for all $x\in (a,\infty)$, making $g$ monotonic (and hence one-to-one). $g$ is also onto, as for some $y\in \R$, we see that $g(e^y+a)=y$, with $e^y+a \in (a,\infty)$. Thus, $g$ is a one-to-one correspondence, giving $(a,\infty) \sim \R$.
+    
+    \item Consider $h \colon [0,1) \to (0,1)$ defined by
+    \[
+        h(x) = \begin{cases} 
+            1/2 & x = 0 \\
+            \frac{x}{1+x} & x\in \{1/n : n\in \mathbb{N}, n>1 \} \\
+            x & \text{otherwise}
+         \end{cases}.
+    \]
+    In other terms, $h$ maps 0 to $1/2$, $1/n$ to $1/(n+1)$ for all integers $n>1$, and all other inputs to themselves.
+    
+    Then, $h$ is one-to-one, as $1/2$ is uniquely mapped to by 0, outputs of form $1/n$ for some integer $n>2$ are uniquely mapped to by $1/(n-1)$, and all other reals in $(0,1)$ are uniquely mapped from themselves.
+    This also makes $h$ onto, as all reals in $(0,1)$ have been shown to be mapped from some real in $[0,1)$.
+   Hence, $h$ is a one-to-one correspondence, and so $[0,1) \sim (0,1)$.
+
+   \textit{Side note: While thinking of valid (non-piecewise) bijections, I found}
+    \[
+        h(x) = x+\frac{3}{2^{\left\lceil -\log_{2}\left(1-x\right)\right\rceil}} - 1,
+    \]
+    \textit{which is interesting, albeit harder to prove. Its graph is displayed below:}
+    
+\end{enumerate}
+\item[\textbf{1.5.6.}]
+\begin{enumerate}
+    \item Consider the collection $I_n = (n,n+1)$ for $n \in \N$. Clearly, $I_i\cap I_j = \varnothing$ when $i \neq j$. Then $I_1, I_2, \dots$ is countable by pairing a natural number $k$ with its respective $I_k$.
+    \item Suppose an uncountable collection of disjoint open intervals were to exist. For each interval $(a,b)$, we note that by the density of $\mathbb{Q}$ in $R$, we have some $r\in \mathbb{Q}$ such that $a<r<b$. Thus, we can create a map from each interval in our collection to some rational number contained in the interval. However, this map cannot be injective, as our domain of intervals is uncountable, while the rationals are countable. Thus, there must exist some rational $q\in \mathbb{Q}$ mapped to by two distinct intervals, say $I_a$ and $I_b$ in our collection. However, this implies that $I_a \cap I_b \neq \varnothing$, which is a contradiction to the intervals being disjoint. Thus, such a collection cannot exist.
+\end{enumerate}
+\item[\textbf{2.2.2.}]
+    \begin{enumerate}
+        \item 
+    \end{enumerate}
+\item[\textbf{2.2.6.}]
+\item[\textbf{2.2.7.}]
+
+
+\end{enumerate}
+
+\end{document}
+
+    % \[
+    %     h(x) = \begin{cases} 
+    %         x-1 + \frac{3}{2} & x \in \left[0,\frac{1}{2}\right) \\
+    %         x-1 + \frac{3}{4} & x \in \left[\frac{1}{2},\frac{3}{4}\right) \\
+    %         \hspace{7mm} \vdots \\
+    %         x-1+\frac{3}{2^n} & x \in \left[1-\frac{1}{2^{n-1}},1-\frac{1}{2^n}\right) \\
+    %         \hspace{7mm} \vdots
+    %      \end{cases}.
+    % \]
+    % This function can be graphed as follows:
+
+    % \begin{tikzpicture}
+    %     \begin{axis}[
+    %             xlabel = \(x\),
+    %             ylabel = {\(h(x)\)},
+    %         ]
+    %       \foreach \xStart/\xEnd  in {0/0.5, 0.5/0.75, 0.75/0.875, 0.875/0.9375} {
+    %           \addplot[domain=\xStart:\xEnd, blue, samples=400, ultra thick] {MyFunction(x)};
+    %       }
+      
+    %       % Show discontinuty points
+    %       \draw [draw=blue, fill=blue, thick] (axis cs: 0, 0.500) circle (2.0pt);
+    %       \draw [draw=blue, fill=white,  thick] (axis cs: 0.500, 1) circle (2.0pt);
+    %       \draw [draw=blue, fill=blue, thick] (axis cs: 0.500, 0.250) circle (2.0pt);
+    %       \draw [draw=blue, fill=white, thick] (axis cs: 0.750, 0.500) circle (2.0pt);
+    %       \draw [draw=blue, fill=blue, thick] (axis cs: 0.750, 0.125) circle (2.0pt);
+    %       \draw [draw=blue, fill=white, thick] (axis cs: 0.875, 0.250) circle (2.0pt);
+    %       \draw [draw=blue, fill=blue, thick] (axis cs: 0.875, 0.063) circle (2.0pt);
+    %       \draw [draw=blue, fill=white, thick] (axis cs: 0.938, 0.125) circle (2.0pt);
+      
+    %       \draw [draw=blue, fill=blue, thick] (axis cs: 0.950, 0.040) circle (0.5pt);
+    %       \draw [draw=blue, fill=blue, thick] (axis cs: 0.970, 0.020) circle (0.5pt);
+    %       \draw [draw=blue, fill=blue, thick] (axis cs: 0.990, 0.000) circle (0.5pt);
+    %     \end{axis}
+    % \end{tikzpicture}

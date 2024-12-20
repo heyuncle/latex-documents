@@ -1,0 +1,80 @@
+\documentclass[11pt,letterpaper]{article}
+\usepackage{fullpage}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{array}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{textcomp}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+
+\newenvironment{solution}{\color{blue}\textit{Solution.}}{\color{black}}
+
+\linespread{1.15}
+
+\begin{document}
+\begin{center}
+    \begin{large}
+        \textbf{Revisions for Problem 7.2.3} \\
+        MAA4211 \\
+        Carson Mulvey
+    \end{large}
+\end{center}
+
+\begin{enumerate}
+    \item[(a)] ($\Leftarrow$) Suppose there exists a sequence of partitions $(P_n)_{n=1}^\infty$ where
+    \[ \lim_{n\rightarrow \infty} [ U(f,P_n) - L(f,P_n) ] = 0. \]
+    Let $\epsilon >0$. By our limit, there must exist some sufficiently large $n$ such that
+    \[
+        U(f) - L(f) \leq U(f,P_n) - L(f,P_n) < \epsilon.
+    \]
+    Because $\epsilon$ is arbitrary, we have $U(f)=L(f)$, making $f$ integrable.
+
+    ($\Rightarrow$) Now suppose that $f$ is integrable on $[a,b]$. Let $k$ be a positive integer. By the Integrability Criterion, there must exist a partition $P_k$ of $[a,b]$ such that
+    \[ U(f,P_k) - L(f,P_k) < \frac{1}{k}. \]
+    Consider the sequence $(P_n)_{n=1}^\infty$ formed by taking the partition described above for each positive integer. Let $\epsilon >0$. We can pick sufficiently large $n$ such that
+    \[ U(f,P_n) - L(f,P_n) < \frac{1}{n} < \epsilon. \]
+    Thus, for $(P_n)_{n=1}^\infty$, we have
+    \[ \lim_{n\rightarrow \infty} [ U(f,P_n) - L(f,P_n) ] = 0, \]
+    as desired.
+    
+    
+    \item[(b)] Because $P_n$ divides $[0,1]$ into $n$ equal subintervals, we have $x_k = \frac{k}{n}$. Because $f(x)=x$, we have \[ m_k=\inf [x_{k-1},x_k] = x_{k-1} = \frac{k-1}{n} \]    
+    and
+    \[ M_k=\sup [x_{k-1},x_k] = x_k = \frac{k}{n}. \]
+    This gives
+    \begin{align*}
+        U(f,P_n) &= \sum_{k=1}^n M_k(x_k-x_{k-1}) \\
+        &= \sum_{k=1}^n \frac{k}{n} \left(\frac{k}{n}-\frac{k-1}{n} \right) \\
+        &= \frac{1}{n^2} \sum_{k=1}^n k \\
+        &= \frac{1}{n^2} \cdot \frac{n(n+1)}{2} \\
+        &= \frac{n+1}{2n}.
+    \end{align*}
+    Similarly,
+    \begin{align*}
+        L(f,P_n) &= \sum_{k=1}^n m_k(x_k-x_{k-1}) \\
+        &= \sum_{k=1}^n \frac{k-1}{n} \left(\frac{k}{n}-\frac{k-1}{n} \right) \\
+        &= \frac{1}{n^2} \sum_{k=1}^n (k-1) \\
+        &= \frac{1}{n^2} \cdot \frac{(n-1)\cdot n}{2} \\
+        &= \frac{n-1}{2n}.
+    \end{align*}
+    \item[(c)] Using the formulas from (b), we have
+    \begin{align*}
+        \lim_{n\rightarrow \infty} [ U(f,P_n) - L(f,P_n) ]
+        &= \lim_{n\rightarrow \infty} \left[ \frac{n+1}{2n} - \frac{n-1}{2n} \right] \\
+        &= \lim_{n\rightarrow \infty} \frac{1}{n} \\
+        &= 0.
+    \end{align*}
+    Hence, by part (a), we know that $f$ is integrable on $[0,1]$. Then,
+    \begin{align*}
+        \int_0^1 f &= \lim_{n\rightarrow\infty} U(f,P_n) \\
+        &= \lim_{n\rightarrow\infty} \frac{n+1}{2n} \\
+        &= \frac{1}{2}.
+    \end{align*}
+\end{enumerate}
+
+
+\end{document}

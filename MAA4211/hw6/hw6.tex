@@ -1,0 +1,46 @@
+\documentclass[11pt,letterpaper]{article}
+\usepackage{fullpage}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{array}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{textcomp}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+
+\newenvironment{solution}{\color{blue}\textit{Solution.}}{\color{black}}
+
+\begin{document}
+\begin{center}
+    \begin{large}
+        \textbf{Assignment 6} \\
+        MAA4211 \\
+        Carson Mulvey
+    \end{large}
+\end{center}
+
+\begin{enumerate}
+    \item[\textbf{(Graded) 2.7.3.}]
+    For both proofs, it suffices to show (i), as (ii) is immediately implied by the contrapositive.
+    \begin{enumerate}
+        \item Suppose $\sum_{k=1}^\infty b_k$ converges. Let $\epsilon > 0$. Then there exists and $N \in \N$ such that for $n>m \geq N$, we have
+        \[
+            |b_{m+1} + b_{m+2} + \cdots + b_n| < \epsilon.
+        \]
+        However, because $0 \leq a_k \leq b_k$ for all $k \in \N$, we can sum these inequalities to show that $a_{m+1}+a_{m+2}+\cdots + a_n \leq b_{m+1} + b_{m+2} + \cdots + b_n$. Because these quantities are positive, this implies
+        \begin{align*}
+            |a_{m+1}+a_{m+2}+\cdots + a_n| &\leq |b_{m+1} + b_{m+2} + \cdots + b_n| < \epsilon.
+        \end{align*}
+        Thus, taking the same $N$ as picked for $(b_n)$, we can apply the Cauchy Criterion for Series again, showing that $\sum_{k=1}^\infty a_k$ converges.
+
+        \item Let $(s_k)$ and $(t_k)$ be the sequences of partial sums of $(a_k)$ and $(b_k)$, respectively. Because all terms of $(a_k)$ and $(b_k)$ are positive, both $(s_k)$ and $(t_k)$ are increasing sequences.
+        
+        Now suppose $\sum_{k=1}^\infty b_k$ converges to $t$. Then, since $(t_k)$ is increasing, $(t_k)$ is bounded by $t$. However, since $a_k\leq b_k$ for all $k\in \N$, we also have $s_k \leq t_k$ for all $k \in \N$. This implies that $(s_k)$ is also bounded by $t$. Thus, $(s_k)$ is monotonic and bounded. By the Monotone Convergence Theorem, it must converge, and hence $\sum_{k=1}^\infty a_k$ also converges.
+    \end{enumerate}
+
+\end{enumerate}
+
+\end{document}

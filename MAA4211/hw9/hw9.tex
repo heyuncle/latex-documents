@@ -1,0 +1,33 @@
+\documentclass[11pt,letterpaper]{article}
+\usepackage{fullpage}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{array}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{textcomp}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+
+\newenvironment{solution}{\color{blue}\textit{Solution.}}{\color{black}}
+
+\begin{document}
+\begin{center}
+    \begin{large}
+        \textbf{Assignment 9} \\
+        MAA4211 \\
+        Carson Mulvey
+    \end{large}
+\end{center}
+
+\begin{enumerate}
+    \item[\textbf{(Graded) 4.5.7.}]
+        Consider the function $g(x)=f(x)-x$. By the Algebraic Continuity Theorem, $g$ is continuous on interval $[0,1]$. A fixed point of $f$ will occur for some $x\in [0,1]$ iff $g(x)=0$.
+        
+        Using the range of $f$, we know that $0\leq g(0)\leq 1$ and $-1\leq g(1)\leq 0$. If $g(0)=0$ or $g(1)=0$, then a fixed point occurs at $x=0$ or $x=1$, respectively. Now let $g(0)>0$ and $g(1)<0$. We have $g(0)>0>g(1)$, so by the Intermediate Value Theorem, there is a point $c\in (0,1)$ where $g(c)=0$, thus making $x=c$ a fixed point.
+\end{enumerate}
+
+
+\end{document}
