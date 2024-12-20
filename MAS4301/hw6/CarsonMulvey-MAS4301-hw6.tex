@@ -1,0 +1,103 @@
+\documentclass[11pt,letterpaper]{article}
+%\usepackage{fullpage}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{array}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{textcomp}
+
+\linespread{1.15}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Mod}[1]{\ (\mathrm{mod}\ #1)}
+
+\newenvironment{solution}{\color{blue}\textit{Solution.}}{\color{black}}
+
+\begin{document}
+\begin{center}
+    \begin{large}
+        \textbf{Homework 6} \\
+        MAS4301 \\
+        Carson Mulvey
+    \end{large}
+\end{center}
+
+\begin{enumerate}
+\item[\textbf{NB 6.1}]
+\begin{enumerate}
+    \item[(c)] For $\mathbb{Z}_4\oplus \mathbb{Z}_2$, there is only one element of order 2, namely $(2,0)$. However, $D$, $D'$, $H$, $V$, and $R_{180}$ are all elements of order 2 in $D_4$. The number of elements of any particular order is preserved by all isomorphisms, so $D_4$ \textit{cannot} be isomorphic to $\mathbb{Z}_4\oplus \mathbb{Z}_2$.
+    \item[(d)] In the case of $p=2$, we know that $D_4$ has order $p^3=8$, but $D_4$ is clearly not abelian (for instance, $R_{90}H\neq HR_{90}$).
+\end{enumerate}
+\item[\textbf{9.6}] Let $A=
+\big(\begin{smallmatrix}
+    0 & 1\\
+    1 & 0
+\end{smallmatrix}\big)\in GL(2,\mathbb{R})$ and $B=
+\big(\begin{smallmatrix}
+    a & b\\
+    0 & d
+\end{smallmatrix}\big)$
+, with $a,b,d\in \mathbb{R}$ and $ad\neq 0$, be an element of $H$. By the 2x2 matrix inversion formula, we have $A^{-1}= \frac{1}{0-1}
+\big(\begin{smallmatrix}
+    0 & -1\\
+    -1 & 0
+\end{smallmatrix}\big) =
+\big(\begin{smallmatrix}
+   0 & 1\\
+   1 & 0
+\end{smallmatrix}\big)$. Then
+\begin{align*}
+    ABA^{-1}
+    &=
+    \begin{bmatrix}
+        0 & 1\\
+        1 & 0
+    \end{bmatrix}
+    \begin{bmatrix}
+        a & b\\
+        0 & d
+    \end{bmatrix}
+    \begin{bmatrix}
+        0 & 1\\
+        1 & 0
+    \end{bmatrix} \\
+    &=
+    \begin{bmatrix}
+        0 & d\\
+        a & b
+    \end{bmatrix}
+    \begin{bmatrix}
+        0 & 1\\
+        1 & 0
+    \end{bmatrix} \\
+    &=
+    \begin{bmatrix}
+        d & 0\\
+        b & a
+    \end{bmatrix},
+\end{align*}
+but when $b\neq 0$, we see that $ABA^{-1}\notin H$. Thus it is \textit{false} that $AHA^{-1}\subseteq H$ for all $A\in GL(2,\mathbb{R})$, so $H$ is \textit{not} a normal subgroup of $A\in GL(2,\mathbb{R})$.
+\item[\textbf{9.12}] Let $G$ be an abelian group, and $H$ be a normal subgroup of $G$. Let $x$ and $y$ be elements of $G/H$. We know that $x=aH$ and $y=bH$ for some $a,b\in G$. Then
+\begin{align*}
+    xy &= (aH)(bH) \\
+    &= abH \\
+    &= baH & \mbox{(since $G$ is abelian)}\\
+    &= (bH)(aH) \\
+    &= yx,
+\end{align*}
+so $G/H$ is clearly also abelian.
+\item[\textbf{9.14}] $14+\langle 8 \rangle$ has order $4$.
+\item[\textbf{9.18}] $\mathbb{Z}_{60}/\langle 15 \rangle$ has order $15$.
+\item[\textbf{9.34}] Since 5 and 7 are relatively prime, we know that there exists integers $s$ and $t$ such that $5s+7t=1$. Let $s$ and $t$ be as such. Then for any $n\in \mathbb{Z}$, we have
+\begin{align*}
+    n\cdot 1&=n(5s+7t) \\
+    &=5ns+7nt.
+\end{align*}
+Moreover, $5ns\in H$ and $7nt\in K$, so $n=5ns+7nt\in HK$. Thus $\mathbb{Z}\subseteq HK$. Also, $HK\subseteq \mathbb{Z}$ is clear, since an element in $HK$ is the sum of two integers. Thus $\mathbb{Z}=HK$. 
+
+Also, since $\mathbb{Z}$ is abelian, $H$ and $K$ are normal subgroups. Additionally, $H\cap K=\{0\}$. Thus, by definition, $Z=H\times K$.
+\end{enumerate}
+
+\end{document}
