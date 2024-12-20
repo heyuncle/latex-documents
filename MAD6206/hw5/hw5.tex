@@ -1,0 +1,118 @@
+\documentclass[11pt,letterpaper]{article}
+\usepackage{fullpage}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{array}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{textcomp}
+\usepackage{graphicx, nicefrac}
+\usepackage{tikz, nicefrac}
+
+\usetikzlibrary{graphs,graphs.standard}
+\tikzgraphsset{edges={draw,semithick}, nodes={circle,draw,semithick}}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\floor}[1]{\left\lfloor{#1}\right\rfloor}
+
+\newenvironment{solution}{\color{Violet}\textit{Solution.}}{\color{black}}
+
+\begin{document}
+\begin{center}
+    \begin{large}
+        \textbf{Homework 5} \\
+        MAD6206 \\
+        Carson Mulvey
+    \end{large}
+\end{center}
+
+\color{black}
+
+\begin{enumerate}
+    \item[NB 1.] Prove that every connected graph has a spanning tree.
+    
+    \begin{solution}
+        Consider the following process for a connected graph $G$:
+        \begin{enumerate}
+            \item[(1)] If $G$ is acyclic, then we are done.
+            \item[(2)] Otherwise, pick an arbitrary cycle in $G$,
+                $(v_0,v_1,\dots,v_{i-1},v_i=v_0)$.
+            We remove $e=(v_0,v_{i-1})$. The path $(v_0,v_1,\dots,v_{i-1})$ still exists, so any two vertices that were connected by a path containing $e$ are still connected. Thus, $G-e$ is still connected.
+            \item[(3)] Repeat (2) until the graph has no cycles left. This process must terminate as $G$ is finite.
+        \end{enumerate}
+        The result of this process will be an acyclic and connected graph. This is equivalent to a tree, as established in Homework 1, and hence is a spanning tree of $G$. Through this process, we can find a spanning tree for any connected graph.
+    \end{solution}
+
+    \item[NB 2.] Provide an algorithm whose input is a graph G and whose output is "yes" if G is connected and "no" if G is not connected.
+    
+    \begin{solution}
+        Let $G$ have vertex set $V$. Consider the following algorithm:
+        \begin{enumerate}
+            \item[(1)] Pick an arbitary $v\in V$. Let $S_0 = \varnothing$ and $S_1 = \{v\}$.
+            \item[(2)] Recursively calculate $S_{i+1} = S_i \cup N(S_i \setminus S_{i-1})$.
+            
+            (In other terms, for each new element in $S_i$, find neighboring vertices through an adjacency list or matrix, adding those that aren't already in $S_i$ to to $S_{i+1}$.)
+            \item[(3)] Continue this recursion until $S_n=S_{n+1}$ for some $n$.
+            \item[(4)] If $S_n=V$, then output ``yes''. Otherwise, output ``no''.
+        \end{enumerate}
+        This algorithm computes a `closure' for some vertex $v$, with $S_n$ being the set of vertices connected to $v$. A graph $G$ is connected iff all vertices are connected, i.e. if this closure is the vertex set itself for arbitrary $v$.
+    \end{solution}
+
+    \item[NB 3.] Prove that the Petersen graph ($P$) is (1) not Hamiltonian, (2) not planar.
+    
+    \begin{solution}
+        Enumerate the vertices as follows:
+	
+            \tikz \graph[math nodes, clockwise]
+            {
+                subgraph I_n [V={a_0,a_1,a_2,a_3,a_4}] --
+                subgraph C_n [V={a_5,a_6,a_7,a_8,a_9},radius=1.25cm];
+                {[cycle] a_0,a_2,a_4,a_1,a_3}
+            };
+        \begin{enumerate}
+            \item[(1)] We will show $P$ is not Hamiltonian by way of contradiction. Supposing a Hamiltonian cycle exists, we note that the number of edges in the cycle connecting the inner 5 vertices to the outer 5 vertices must be even, since we must both start and end on the same vertex. This gives two cases:
+            \begin{enumerate}
+                \item Two connecting edges are in the cycle: 
+                The two connecting edges are formed by two inner vertices, say $b_0$ and $b_1$, and two outer vertices, say $c_0$ and $c_1$. To form the cycle, $b_0$ and $b_1$ must be connected by a path of length 4. Because of this, $b_0$ and $b_1$ must be adjacent. Similarly, $c_0$ and $c_1$ must form a path of length 4 in the cycle, making them adjacent. However, these vertices then form a 4-cycle, which is not possible in the Petersen graph.
+                
+                \item Four connecting edges are in the cycle: 
+                WLOG let $(a_0,a_5)$ be the edge that is \textit{not} in the cycle, forcing the other edges containing $a_0$ and $a_5$, i.e. $(a_5,a_6)$, $(a_5,a_9)$, $(a_0,a_2)$, and $(a_0,a_3)$, to be in the cycle. Additionally, because two edges already contain $a_6$, the edge $(a_6,a_7)$ \textit{cannot} be in the cycle. This forces the other edge containing $a_7$, i.e. $(a_7,a_8)$, to be in the cycle. However, we now have a 5-cycle between $a_0$, $a_2$, $a_7$, $a_8$, and $a_3$ which is not possible within our Hamiltonian cycle.
+            \end{enumerate}
+            \item[(2)] 
+            To show $P$ is not planar, construct a minor by contracting the edges $(a_0,a_5)$, $(a_1,a_6)$, $(a_2,a_7)$, $(a_3,a_8)$, and $(a_4,a_9)$, resulting in $K_5$. By Kuratowski's Theorem, $P$ is not planar.
+        \end{enumerate}
+    \end{solution}
+    
+
+    \item[NB 4.] Show that the following are equivalent for a graph G:  (1) G is bipartite, (2) G is 2-colorable, (3) G contains no odd cycle.  
+
+    \begin{solution}
+        \begin{enumerate}
+            \item[$(1)\Rightarrow(2)$] For bipartite $G=(A\sqcup B, V)$, we can color vertices in $A$ and $B$ with our two respective colors.
+            \item[$(2)\Rightarrow(3)$] We will prove by contradiction. Let $G$ be a 2-colorable graph with an odd cycle. We can color an arbitrary vertex 1, which will force its neighbors to be colored 2. This process can continue, alternating between 1 and 2, but because the cycle is odd, the last two adjacent vertices must be the same color, forming a contradiction.
+        \end{enumerate}
+    \end{solution}
+
+    \item[11.13.12.] Let $G$ be a graph with adjacency matrix $A$. Prove that the $(i,j)$ entry of $A^d$ is equal to the number of walks of length $d$ from $i$ to $j$
+    
+    \begin{solution}
+        Let $G$ have degree $n$. We will prove by induction on $d$. For $d=1$, the entry $(i,j)$ of $A$, $A_{i,j}$, is the number of edges between $i$ and $j$, which coincides with the number of walks of length 1.
+
+        Suppose that for some $k$, the entry $(i,j)$ of $A^k$ equal the number of walks of length $k$ from $i$ to $j$. Now consider some $(s,t)$ entry of $A^{k+1}=A^k \cdot A$. By the matrix multiplication formula, we have
+        \[
+            (A^{k+1})_{s,t} = \sum_{i=1}^n (A^k)_{s,i} \cdot A_{i,t}.
+        \]
+        By our inductive hypothesis, $(A^k)_{s,i}$ is the number of walks of length $k$ from $s$ to $i$. Additionally, $A_{i,t}$ is the number of edges connecting $i$ and $t$. Thus, $(A^k)_{s,i} \cdot A_{i,t}$ is the number of walks of length $k+1$ from $s$ to $t$ that passes through $i$. When summed for each disjoint $i$, we have the total number of walks of length $k+1$ from $s$ to $t$. Since this is equal to $(A^{k+1})_{s,t}$, our inductive step is complete.
+    \end{solution}
+
+    \item[NB 5.] Prove that the chromatic polynomial of a tree of order n is $\chi(x) = x (x-1)^{n-1}$.
+    
+    \begin{solution}
+        A vertex in a tree will only neighbor its parent and children, if they exist. This makes a coloring proper if and only if every vertex is a different color from its parent (besides the root). We have $x$ options for the root, and coloring the other $n-1$ vertices layer by layer, we have $x-1$ options for each vertex, subtracting 1 for the color of each parent vertex. Multiplying these gives $\chi(x) = x (x-1)^{n-1}$, as desired.
+    \end{solution}
+
+\end{enumerate}
+
+\end{document}

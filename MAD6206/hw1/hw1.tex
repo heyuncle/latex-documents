@@ -1,0 +1,97 @@
+\documentclass[11pt,letterpaper]{article}
+\usepackage{fullpage}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{array}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{textcomp}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+
+\newenvironment{solution}{\color{Violet}\textit{Solution.}}{\color{black}}
+
+\begin{document}
+\begin{center}
+    \begin{large}
+        \textbf{Homework 1} \\
+        MAD6206 \\
+        Carson Mulvey
+    \end{large}
+\end{center}
+
+\begin{enumerate}
+    \item Find the first 5 terms in the power series expansion of $\frac{1}{\sqrt{1+x}}$.
+    
+    \begin{solution}
+        Let $f(x)=(1+x)^{-1/2} = \sum_{n=0}^\infty \frac{f^{(n)}(0)}{n!} x^n$. We have
+        \begin{align*}
+            f^{(1)}(x)&=-\frac{1}{2}(1+x)^{-3/2}, \\
+            f^{(2)}(x)&=\frac{3}{4}(1+x)^{-5/2}, \\
+            f^{(3)}(x)&=-\frac{15}{8}(1+x)^{-7/2}, \\
+            f^{(4)}(x)&=\frac{105}{16}(1+x)^{-9/2}.
+        \end{align*}
+        Then,
+        \begin{align*}
+            f(x) &= \frac{f^{(0)}(0)}{0!} + \frac{f^{(1)}(0)}{1!} x + \frac{f^{(2)}(0)}{2!} x^2 + \frac{f^{(3)}(0)}{3!} x^3 + \frac{f^{(4)}(0)}{2!} x^4 + \dots \\
+            &= \boxed{1 - \frac{1}{2} x + \frac{3}{8} x^2 - \frac{5}{16} x^3 + \frac{35}{128} x^4} + \dots
+        \end{align*}
+    \end{solution}
+
+    \item Prove the recurrence given in class for the Stirling numbers of the second kind.
+    
+    \begin{solution}
+        The construction of a partition of $[n]$ into $k$ parts can be split into two cases:
+
+        \textit{Case 1: 1 is in its own part.} If 1 is in its own part, we only need to partition 2 through $n$ into $k-1$ parts. By definition of Stirling numbers of the second kind, this can be done in $S(n-1,k-1)$ ways.
+
+        \textit{Case 2: 1 is not in its own part.} We can first partition 2 through $n$ into $k$ parts, which can be done in $S(n-1,k)$ ways. Then, since 1 is not in its own part, we can add it to any of the $k$ distinct parts. Thus, there are $k\cdot S(n-1,k)$ partitions in this case.
+
+        Because these cases are exhaustive and disjoint, we conclude that
+        \[
+            S(n,k) = S(n-1,k-1) + k\cdot S(n-1,k).
+        \] \qed
+    \end{solution}
+
+    \item Prove the formulas given in class (1) for the number of set partitions of type $(a_1,a_2,\dots,a_k) \vdash n$ and (2) for the number of partitions of cycle type $(a_1,a_2,\dots,a_k) \vdash n$.
+    
+    \item[4.] Using the recurrence, find the exponential generating function for the Bell numbers.
+    
+    \begin{solution}
+        Let $I(x) = \sum_{n\geq 0} I_n \frac{x^n}{n!}$, with $I_k=1$ for all $k$. Then $I(x)=e^x$.
+
+        Also, let $B(x) = \sum_{n\geq 0} B_n \frac{x^n}{n!}$ be the generating function for the Bell numbers. Then
+        \begin{align*}
+            B'(x) &= \frac{d}{dx}\left[ \sum_{n\geq 0} B_{n+1} \frac{x^{n+1}}{(n+1)!} \right] \\
+            &= \sum_{n\geq 0} B_{n+1} \frac{x^{n}}{n!} \\
+            &= \sum_{n\geq 0} \left[ \sum_{k=0}^n \binom{n}{k} B_k \right] \frac{x^{n}}{n!} \\
+            &= \sum_{n\geq 0} \left[ \sum_{k=0}^n \binom{n}{k} B_k \cdot I_{n-k} \right] \frac{x^{n}}{n!} \\
+            &= B(x)I(x) \\
+            &= e^x B(x).
+        \end{align*}
+
+        We can solve this differential equation by suggesting that $B(x)=ce^{e^x}$ for some $c$. Indeed, see that $B'(x)=ce^xe^{e^x}=e^x B(x)$ in this case. Because $B_0=1$, we have $B(0)=1$, which gives $c=e^{-1}$. Thus
+        \[
+        B(x)=e^{e^x-1}.
+        \]
+    \end{solution}
+    
+    \item[5.] The following four statements are equivalent:  (1)  $T$ is a tree; (2) there is a unique path joining every two vertices of $T$; (3) $T$ is connected and $|E(T)| = n-1$; (4) $T$ is acyclic and $|E(T)| = n-1$.
+
+    \begin{solution}
+        $(3)\Rightarrow(4)$ Assume that $T$ is connected and $|E(T)| = n-1$. Then 
+
+        $(3)\Rightarrow(4)$ Assume that $T$ is acyclic and $|E(T)| = n-1$. Now suppose that $T$ is \textit{not} connected. Then there must exist 
+
+        $(1)\Rightarrow(2)$ Assume that $T$ is a tree, i.e. that it is acyclic and connected. Then suppose that there is \textit{not} a unique path between every two vertices of $T$. Clearly, because $T$ is connected, at least one path must exist between every two vertices. Thus, there must exist vertices $n$ and $m$ between which multiple distinct paths exist, namely
+        \begin{align*}
+            p_1 &= \\
+            p_2 &= .
+        \end{align*}
+    \qed
+    \end{solution}
+\end{enumerate}
+
+\end{document}

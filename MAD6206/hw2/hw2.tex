@@ -1,0 +1,110 @@
+\documentclass[11pt,letterpaper]{article}
+\usepackage{fullpage}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{array}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{textcomp}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+
+\newenvironment{solution}{\color{Violet}\textit{Solution.}}{\color{black}}
+
+\begin{document}
+\begin{center}
+    \begin{large}
+        \textbf{Homework 2} \\
+        MAD6206 \\
+        Carson Mulvey
+    \end{large}
+\end{center}
+
+\begin{enumerate}
+    \item[Non-book.] The number of ways to roll $k$ dice summing to $s$ is the number of weak compositions of $s$ into $k$ parts, but with a maximum of 6 per part. We can count the number of ways \textit{with} going over 6 for $i$ parts by picking those $i$ parts and removing 6 from each of them. Thus, by inclusion-exclusion (PIE), we have
+    \[
+        \text{(\# ways)} = \sum_{i=0}^k (-1)^i\binom{k}{i}\binom{s-6i-1}{k-1}.
+    \]
+    In particular, for $k=2$, we have
+    \begin{align*}
+        \text{(\# ways)} &= \binom{s-1}{1} - 2\binom{s-6-1}{1} + \binom{s-12-1}{1} \\
+        &= \begin{cases} 
+            0 & x< 2 \\
+            s-1 & 2\leq x\leq 7 \\
+            13-s & 7 < x \leq 12 \\
+            0 & x> 12
+         \end{cases}
+        .
+    \end{align*}
+    \item[3.13.3.]
+\begin{enumerate}
+    \item[(b)] Let $m$ be the number of males and $n$ the number of females in a club, with $k$ members being picked to form a committee. Then the LHS counts, for each possible amount of male students picked, $i$ ($0\leq i\leq m$), the number of ways to pick the rest ($k-i$) female. The RHS counts the number of ways to pick a commmitte $k$ from all male and female members in one step. Because LHS and RHS count the same committee-forming, they are equal.
+    \item[(c)] Shift the index of $n$ down by 2. Then it suffices to show
+    \[
+        \sum_{i=0}^k{n-2+k+i\choose n-2} = {n+k-1\choose n-1}.
+    \]
+    The RHS counts the number of weak compositions of $k$ into $n$ parts. The LHS counts the number of weak compositions of all integers from 0 to $k$ into $n-1$ parts. These are equivalent, as we can `separate' the first part of the composition, and consider the rest of the composition depending on how much of $k$ is summed towards by the first part.
+    \item[(d)] Let
+    \begin{align*}
+        f(x) &= (x+1)^n \\
+        &= \sum_{k=0}^n \binom{n}{k}x^k.
+    \end{align*}
+    Then
+    \begin{align*}
+        f'(x) &= n(x+1)^{n-1} \\
+        &= \sum_{k=0}^n k\binom{n}{k}x^{k-1}.
+    \end{align*}
+    Plugging in $x=1$ gives the desired identity. Note that the $k=0$ term does not contribute to the sum.
+\end{enumerate}
+    \item[3.13.15.]
+    \begin{enumerate}
+        \item We can find the number of ways to choose elements from $X$ two at a time without replacement, and then divide by the $k!$ ways to permutate the $k$ parts. This gives
+        \begin{align*}
+            \text{(\# factors)} &= \frac{1}{k!}\prod_{i=1}^k \binom{2i}{2} \\
+            &= \frac{1}{k!}\prod_{i=1}^k i(2i-1) \\
+            &= \frac{(1\cdot 2\cdot \dots \cdot k)(1\cdot 3\cdot \dots \cdot (2k-1))}{k!} \\
+            &= (2k-1)!!,
+        \end{align*}
+        as desired.
+        \item ($\Rightarrow$) Suppose that a permutation $X$ were to interchange a $k$-subset with its complement. Then we can express the $k$ subset as $a_1,a_2,\dots,a_k$, and the complement of $a_i$ as $\bar{a}_i$. Then our permutation can be expressed in cycle notation as 
+        \[
+            (a_1 \bar{a_1})(a_2 \bar{a_2})\cdots (a_k \bar{a_k}),
+        \]
+        which has only even cycles.
+
+        ($\Leftarrow$) Now suppose that a permutation consisted only of even cycles. Express the permutation in cycle notation, and let $X_e$ and $X_o$ partition $X$ such that $X_e$ contains all elements of $X$ which have an even index within its cycle, and $X_o$ contains all elements of $X$ with an odd index within its cycle. Then our permutation must interchange $X_e$ and $X_o$, as an even cycle will always map an even indexed element to an odd indexed element, and vice versa. We see that $X_e$ satisfies the $k$-subset we are looking for.
+    \end{enumerate}
+    \item[4.8.1.]
+    \begin{enumerate}
+        \item We will prove by strong induction on $n$. Our base cases are clear, as $F_1=1$ counts the one way of choosing 0 seats, and $F_2=2$ counts the empty and singleton set. Now assume the inductive hypothesis for seat amounts from 0 to $k$. Then, since $F_{k+2}=F_{k+1}+F_{k}$, we see that the number of ways of choosing a subset with $k+1$ seats is the sum of the ways for $k$ and $k-1$ seats. Indeed, we note that if we add the most recently added (final) chair in the line to the subset, we cannot add the second-to-last chair, giving $k-1$ seats left to choose from. However, if we do not add the final chair, we have the same situation as having $k$ seats to begin with.
+        \item For our small cases, we note that $F_2+F_0=3$ counts one chair, the other chair, or neither, and $F_3+F_1=4$ counts any of the three chairs or none of them.
+        
+        Now for the general case of $k>3$, we see that if we add a new chair to the circle ($k$) and include it in the subset, then neither neighboring chair can be selected, giving $k-3$ chairs to work with. If we do not include the new chair in the subset, we have $k-1$ chairs to work with. In either case, we no longer have potential neighbors on either end of the circle, so by part (a), the $k-3$ case has $F_{k}$ subsets, and the $k-1$ case has $F_{k-2}$ subsets, as desired.
+    \end{enumerate}
+    \item[4.8.9.]
+    \begin{enumerate}
+        \item[(iii)] We have
+        \begin{align}
+            f(n+1) &= 1 + \sum_{i=0}^{n-1} f(i) \\
+            f(n) &= 1 + \sum_{i=0}^{n-2} f(i).
+        \end{align}
+        Subtracting (2) from (1) gives
+        \begin{align*}
+            f(n+1)-f(n) = f(n-1)
+            \implies f(n+1) = f(n) + f(n-1).
+        \end{align*}
+    Using the initial condition, we see that $f(0)=f(1)=1$, and so we conclude that $f(n)$ maps to the $n$th Fibonacci number.
+    \end{enumerate}
+    \item[4.8.16.]
+    This problem is equivalent to the probability that a lattice path from $(0,0)$ to $(n,n)$ does not cross the diagonal, where picking a red and blue ball is equivalent to moving vertically and horizontally on the lattice path, respectively.
+    The number of paths not crossing the diagonal is $C_n=\frac{1}{n+1}\binom{2n}{n}$, and when divided by the total number of paths gives
+    \[
+        \frac{\frac{1}{n+1}\binom{2n}{n}}{\binom{2n}{n}} = \frac{1}{n+1}.
+    \]
+    % \item[4.8.19(p.71).]  
+    % \item[4.8.20.]  
+\end{enumerate}
+
+\end{document}

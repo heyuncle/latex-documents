@@ -1,0 +1,139 @@
+\documentclass[11pt,letterpaper]{article}
+\usepackage{fullpage}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{array}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{textcomp}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\floor}[1]{\left\lfloor{#1}\right\rfloor}
+
+\newenvironment{solution}{\color{black}\textit{Solution.}}{\color{gray}}
+
+\begin{document}
+\begin{center}
+    \begin{large}
+        \textbf{Homework 3} \\
+        MAD6206 \\
+        Carson Mulvey
+    \end{large}
+\end{center}
+
+\color{gray}
+
+\begin{enumerate}
+    % \item How many monic polynomials of degree n in $\mathbb{Z}_p[x]$ are there that do not take the value 0 for any x in $\mathbb{Z}_p$?
+
+    \item[2.] How many positive integers less than 1000 are there having no factor between 1 and 10?
+    \begin{solution}
+        If the `between' is nonstrict, then the answer is 0. As such, we will find positive integers with no factor strictly between 1 and 10.
+
+        A positive integer having no factor strictly between 1 and 10 is equivalent to having no prime factor of 2, 3, 5, or 7. The number of positive integers less than 1000 with no factor $k$ is $\floor{999/k}$.
+        By inclusion-exclusion, our answer is equivalent to
+        \begin{align*}
+            1000 &- \left(
+                \floor{\frac{999}{2}} +
+                \floor{\frac{999}{3}} +
+                \floor{\frac{999}{5}} +
+                \floor{\frac{999}{7}}
+            \right)\\
+            &+ 
+                \floor{\frac{999}{2 \cdot 3}} +
+                \floor{\frac{999}{3 \cdot 5}} +
+                \floor{\frac{999}{5 \cdot 7}} +
+                \floor{\frac{999}{7 \cdot 2}} +
+                \floor{\frac{999}{2 \cdot 5}} +
+                \floor{\frac{999}{3 \cdot 7}}
+                \\
+            &- \left(
+                \floor{\frac{999}{3\cdot 5\cdot 7}} +
+                \floor{\frac{999}{2\cdot 5\cdot 7}} +
+                \floor{\frac{999}{2\cdot 3\cdot 7}} +
+                \floor{\frac{999}{2\cdot 3\cdot 5}}
+            \right)\\
+            &+ \floor{\frac{999}{2\cdot 3\cdot 5 \cdot 7}} \\
+            = 229.
+        \end{align*}
+    \end{solution}
+    
+    \item[3.] How many ways to choose k points, no two consecutive, from n points on a circle?
+    \begin{solution}
+        We can pick an arbitrary direction that the points are chosen in, as well as an arbitrary `first point', $X$, to begin choosing from. Given that a chosen point cannot have a chosen point directly after, we can create a `chosen group' consisting of a chosen point with the nonchosen point that will follow it, creating $k$ of these groups. There will then be $n-2k$ nonchosen points in none of these groups. Distributing these groups will guarantee that there will be a nonchosen point before and after a chosen point. Then, to find the number of these distributions, take the following two cases:
+
+        \begin{enumerate}
+            \item[(1)] $X$ is a chosen point: In this case, our construction of the circle begins with a group. There are then $k-1$ groups left, with $n-2k$ remaining nonchosen points, which we can permutate in $\binom{n-k-1}{k-1}$ ways.
+            \item[(2)] $X$ is not a chosen point: In this case, we begin constructing the circle at the point after $X$, and permutate our $k$ groups with $n-2k$ nonchosen points. This can be done in $\binom{n-k}{k}$ ways.
+        \end{enumerate}
+        Combining these cases gives
+        \begin{align*}
+            \text{\# ways} &= \binom{n-k-1}{k-1}
+            + \binom{n-k}{k} \\
+            &= \binom{n-k-1}{k-1} + \frac{n-k}{k}\binom{n-k-1}{k-1} \\
+            &= \frac{n}{k}\binom{n-k-1}{k-1}.
+        \end{align*}
+    \end{solution}
+    
+    \item[4.] How many 2-colored bracelets with n beads are there if two bracelets are considered the same if they are in the same orbit under the action of the dihedral group?
+    
+    \begin{solution}
+        Our dihedral group $D_n$ consists of the rotational symmetries of $C_n$ and $n$ reflectional symmetries. 
+        
+        If $n$ is odd, a reflection creates $\frac{(n-1)}{2}$ 2-cycles, and one 1-cycle (the point being passed through by the line of symmetry). If $n$ is even, half of our reflection lines pass through 0 points, and the other half pass through 2 points. Thus, half of our symmetries have $\frac{n}{2}$ 2-cycles, and the other half has $\frac{(n-2)}{2}$ 2-cycles and two 1-cycles.  Thus, our cycle index for $D_n$ is 
+        \[
+            {\displaystyle Z(D_{n})={\frac {1}{2}}Z(C_{n})+{\begin{cases}
+                {\frac {1}{2}}z_{1}z_{2}^{\frac{(n-1)}{2}}
+                &n \mbox{ is odd}\\
+                {\frac {1}{4}}\left(z_{1}^{2}z_{2}^{\frac{(n-2)}{2}}+z_{2}^{\frac{n}{2}}\right)
+                &n{\mbox{ is even.}}
+            \end{cases}}}
+        \]
+        When plugging in 2 for all $z_k$, we note that $Z(C_n)$ will collapse to the number of bracelets under $C_n$ with 2 colors. Thus, using the bracelet formula from class, we get that the number of total bracelets under $D_n$ is
+        \[
+            {\frac {1}{2n}}\sum _{d|n}\varphi (d)2^{n/d}
+            +{\begin{cases}
+                2^{\frac{(n-1)}{2}}
+                &n \mbox{ is odd}\\
+                2^{\frac{(n-2)}{2}}+2^{\frac{(n-4)}{2}}
+                &n{\mbox{ is even.}}
+            \end{cases}}
+        \]
+    \end{solution}
+    
+    \item[5.] Consider 2-colorings of the faces of the 3-dimensional cube if two colorings are considered the same if they are in the same orbit under the action of the orientation preserving symmetries of the cube.  Find the weight enumerator using the Polya theorem.  (Extra if you also do it for the non-orientation preserving symmetries)
+    
+    \begin{solution}
+        We consider all of the orientation preserving actions on the cube, that is, the actions on group $O_h$:
+        \begin{enumerate}
+            \item Identity action:
+            
+            This creates six 1-cycles. There is 1 identity action.
+            \item 120 degree rotation about a line passing through opposite corners:
+            
+            This creates two 3-cycles, each comprised of the 3 faces sharing a vertex being passed through. 4 choices of lines and 2 rotation directions gives 8 of these symmetries.
+            \item 180 degree rotation about a line passing through the center of two opposite edges:
+            
+            This creates The two pairs of faces sharing the edges being passed through by the line will each form a 2-cycle. The two faces with no edge being passed through by the line will form a 2-cycle. Because a cube has 12 edges, there are 6 possibilities for this line.
+            \item 90 degree rotation about a line passing through the center of two opposite faces:
+            
+            The two faces being passed through each form a 1-cycle. The other four faces form a 4-cycle. There are 3 pairs of faces to choose from, and 2 rotation directions, giving 6 of these symmetries.
+            \item 180 degree rotation about a line passing through the center of two opposite faces: 
+            
+            The two faces passed through each form a 1-cycle, and the other four form two 2-cycles. There are 3 pairs of faces to choose from, giving 3 symmetries.
+        \end{enumerate}
+
+    Combining these 24 symmetries, our cycle index for $O_h$ becomes
+    \[
+        {\displaystyle Z(O_h)={\frac {1}{24}}\left(z_{1}^{6}+8z_{3}^{2}+6z_{2}^{3}+6z_{1}^{2}z_{4}+3z_{1}^{2}z_{2}^{2}\right).}
+    \]
+    By the Polya theorem, our weight enumerator is
+\begin{align*}
+    {{\frac {1}{24}}\left((r+b)^{6}+8(r^3+b^3)^{2}+6(r^2+b^2)^{3}+6(r+b)^{2}(r^4+b^4)+3(r+b)^{2}(r^2+b^2)^{2}\right).}
+\end{align*}
+    \end{solution}
+\end{enumerate}
+
+\end{document}
