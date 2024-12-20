@@ -1,0 +1,202 @@
+\documentclass[11pt,letterpaper,dvipsnames]{article}
+\usepackage{fullpage}
+\usepackage{multicol}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{youngtab}
+\usepackage{graphicx, nicefrac}
+\usepackage{tikz, nicefrac,url}
+
+\newcommand{\ds}{\displaystyle}
+\newcommand{\bv}{\mathbf}
+\newcommand{\lv}{\langle}
+\newcommand{\rv}{\rangle}
+\newcommand{\qbin}[2]{\begin{bmatrix}{#1}\\ {#2}\end{bmatrix}_q}
+\newcommand{\ycen}[1]{{\tiny\Yvcentermath1 $\yng#1$}}
+
+\newenvironment{solution}{\color{BlueViolet}\textit{Solution.}}{\color{black}}
+
+\begin{document}
+
+%%%Version 1%%%%
+
+\flushleft
+
+\begin{center}
+    \begin{large}
+        \textbf{Take-home Final} \\
+        MAD4204 \\ 
+        Carson Mulvey
+    \end{large}
+\end{center}
+
+\pagestyle{empty}
+
+
+\flushleft
+
+\begin{enumerate}
+
+	\item Projects here: \url{https://ufl.instructure.com/courses/393318/pages/projects}\newline
+	Read two projects and write a two paragraph response summarizing the main results and what you learned.
+	Some of these are quite long, but try to read at least one of them in full detail.
+	Please make sure to identify two aspects of each project that you liked!
+	
+	\color{BlueViolet}
+	
+	\hspace{1cm}
+	The first project I read about was Mai's project on Hackenbush. I was really interested in this project because I already had some surface level exposure to the topic due to an explanatory YouTube video\footnote{\texttt{https://youtu.be/ZYj4NkeGPdM}}. In Mai's paper, I was able to see the topic with some more formality, and learned more about the set notation with left and right options. I also learned that $o(G)$ is notation for the outcome of a game, and I found it interesting that using this notation, it can be shown that $(\mathbb{G},+)$ is an abelian group. It was also proven that every Red-Blue Hackenbush game is a number (has an outcome in favor of Red, Blue, or a zero game). I had some intuition that this was the case, but seeing it formalized was interesting. I had seen the relationship between stacking red and blue stalks and generating rational numbers before, but Mai's visualization was really well made and helped solidify my visual understanding of it. Overall, Mai's diagrams in the paper were also really well made, and I enjoyed the order in which each concept was introduced.
+	
+	\hspace{1cm}
+	The second project I read was Ben's project on the dimer problem. This project was an interesting application of bipartite graphs to molecules covering a crystal surface. The first part of the paper describing the dimers covering a grid represented as a bipartite graph reminded me of earlier in the semester, when we proved when the equivalent of `tiling a chess board' is possible or not possible. The paper explains that this bipartite grid can be expressed by an $mn/2$ by $mn/2$ matrix, and that the determinant of this matrix will be the number of perfect matchings on the $m$ by $n$ grid. Ben's proof for this was very well written and had a very unique approach using the sign changes in terms of the determinant based on `loops' created between two perfect matchings. The accompanying diagram was also very useful in actually understanding what was occuring when the edges are `slid clockwise' in the proof.
+	
+	\color{black}
+	
+	
+	\item Let $G$ be a simple planar graph with $n \geq 3$ vertices.
+	Prove that $G$ has at most $3n-6$ edges.
+	
+	\begin{solution}
+		Since each face of a planar graph is comprised of at least 3 edges, and an edge is shared by two faces, we have $|F|\leq \frac{2}{3}|E|$. By Euler's Theorem, we have
+		\begin{align*}
+			|E|+2 &= |F|+|V| \\
+			&\leq{} \frac{2}{3}|E|+|V| \\
+			\implies \frac{1}{3}|E| &\leq |V|-2 \\
+			\implies |E| &\leq 3|V|-6.
+		\end{align*}
+		Thus, for $|V|=n$, $G$ has at most $3n-6$ edges. \qed
+	\end{solution}
+	
+	
+	\item For $P$ a poset, let $\mathbb{C}[P]$ be the vector space over $\mathbb{C}$ whose basis is the elements of $P$.
+	Define the linear transformations $U_P,D_P: \mathbb{C}[P] \to \mathbb{C}[P]$ by, for $y \in P$,
+	\[
+	U_P(y) = \sum_{y \lessdot z} z \quad \mbox{and} \quad D_P(y) = \sum_{x \lessdot y} x.
+	\]
+	For example, in the Boolean lattice $B_3$ we have $U_{B_3}(\{1\} + \{2\}) = 2 \cdot \{1,2\} + \{1,3\} + \{2,3\}$.
+	Also, let $I_P$ be the identity map.
+	
+	Recall Young's lattice $\mathcal{Y}$ is the poset of integer partitions ordered by containment.
+	In the remainder of the problem, define $U := U_\mathcal{Y}$, $D:= D_\mathcal{Y}$ and $I:= I_\mathcal{Y}$.
+	
+	\begin{enumerate}
+		\item Prove that $DU - UD = I$ as linear transformations.
+		\item 
+		For $\lambda \in \mathcal{Y}$, let $f^\lambda$ be the number of saturated chains from $\varnothing$ to $\lambda$ in $\mathcal{Y}$.
+		Explain why
+		\[
+		D^nU^n(\varnothing) = \left(\sum_{\lambda \vdash n} (f^\lambda)^2\right) \varnothing.
+		\]
+		Note we are first applying $U$ $n$ times, then $D$ $n$ times.
+		 
+		
+		\item Using (a), prove that $D^nU^n(\varnothing) = n! \cdot \varnothing$.
+		Conclude from (b) that $n! = \sum_{\lambda \vdash n} (f^\lambda)^2$.
+		
+		(Hint: Observe that $D^2U^2 = D(I + UD)U = DU + DUDU$. Try to generalize this.)
+	\end{enumerate}
+	
+	\begin{solution}
+		\begin{enumerate}
+			\item 
+			First, we define $u(\lambda)$ to be the number of uniquely valued parts of some $\lambda$. For instance, $\alpha =(3,2,2,1)$ has 3 unique parts (namely 3, 2, and 1), so $u(\alpha)=3$. 
+
+			Since all partitions in $\mathcal{Y}$ form the basis of $\mathbb{C}[\mathcal{Y}]$, it suffices to show that $(DU-UD)(\lambda)=I(\lambda)=\lambda$ for all $\lambda \in \mathcal{Y}$. If $\lambda=\varnothing$, then
+			\begin{align*}
+				(DU-UD)(\varnothing)&=D(U(\varnothing)-U(D(\varnothing)) \\
+				&=D((1))-U(0) \\
+				&=\varnothing-0=\varnothing.
+			\end{align*}
+			
+			Now let $\lambda$ be an arbitrary nonempty partition of rank $n>0$. We will first find the coefficient of the $\lambda$ term in $DU(\lambda)$ and $UD(\lambda)$.
+
+			We see that $U(\lambda)$ outputs the sum of partitions covering $\lambda$, i.e the results of either adding 1 to a part of $\lambda$ or adding a new part of value 1. 
+			Because parts of the same value are indistinguishable, our number of choices for parts of $\lambda$ to add to is the amount of distinct values within the parts, or $u(\lambda)$. We can also add a new part of value 1 to $\lambda$, giving a total of $u(\lambda)+1$ partitions covering $\lambda$. $DU(\lambda)$ will then have a coefficient of $u(\lambda)+1$ for $\lambda$, since each of the $u(\lambda)+1$ partitions contribute 1 to the coefficient.
+
+			Similarly, $D(\lambda)$ returns all partitions resulting from removing 1 from one of the parts of $\lambda$. The number of ways to do this is the number of unique parts of $\lambda$, or $u(\lambda)$. Since each of the $u(\lambda)$ partitions covered by $\lambda$ contribute 1 to the coefficient of $\lambda$ in $UD(\lambda)$, we get a coefficient of $u(\lambda)$.
+
+			We will now show that all other terms of $(DU-UD)(\lambda)$ will cancel out to 0.
+
+			\vspace{0.2cm}
+			\textit{Claim:} For any partition $\alpha \neq \lambda$, $UD(\lambda)$ and $DU(\lambda)$ have the same coefficient for $\alpha$.
+
+			\vspace{0.2cm}
+			\textit{Proof of Claim:} If some $\alpha$ has a non-zero coefficient in $UD(\lambda)$, then it is the output of subtracting 1 from a part of $\lambda$ followed by adding 1 to a part of $\lambda$ (or creating a new part of 1). Note that this coefficient is 1, as the intermediary poset with one part subtracted from is unique.
+			
+			On the other hand, the same $\alpha$ can be constructed in $UD(\lambda)$ as described if and only if it can be constructed in $DU(\lambda)$. This is done by \textit{first} adding 1 to a part of $\lambda$ (or creating a new part of 1), \textit{then} subtracting 1 from another part. There is a one-to-one correspondence between these two constructions, so the coefficient of $\alpha$ is the same (either 0 or 1) between $UD(\lambda)$ and $DU(\lambda)$, as desired.
+
+			\vspace{0.2cm}
+			Now let $A(\lambda)$ denote all non-$\lambda$ terms output from $DU(\lambda)$. By our claim, the non-$\lambda$ terms of $UD(\lambda)$ is also $A(\lambda)$. Then we have
+			\begin{align*}
+				(DU-UD)(\lambda) &= ((u(\lambda)+1)\lambda + A(\lambda)) - (u(\lambda)\lambda + A(\lambda))\\
+				&= \lambda,
+			\end{align*}
+			 which concludes our proof. \qed
+			
+			\item A saturated chain can be thought of as a path to or from $\varnothing$ to some partition $\lambda$. For each application of $U$, at any partition $\lambda$, we are summing the number of paths of all permutations that $\lambda$ covers, which gives the number of paths of $\lambda$ itself. This creates a `block walking' scenario where for partitions of rank $0 \leq i \leq n$, the coefficient of each permutation in $U^i(\varnothing)$ is the number of saturated chains to that permutation. Thus, when $i=n$, we have
+			\[
+				U^n(\varnothing) = \sum_{\lambda \vdash n} (f^\lambda)\lambda.
+			\]
+			Then, for each application of $D$, we are `walking backwards' one step, summing the paths to a permutation $\alpha$ from the permutations covering $\alpha$. Because of this, for partitions of rank $0 \leq j \leq n$, the coefficient of some $\alpha$ in $D^{n-j}U^n(\varnothing)$ is the total number of paths from $\varnothing$ to some $\lambda \vdash n$, then back down to $\alpha$. When $j=0$, we are then counting the number of paths from $\varnothing$ to some $\lambda \vdash n$, then back to $\varnothing$. Because the saturated chains from $\varnothing$ to $\lambda$ and back to $\varnothing$ can be chosen independently, we now get our final result of
+			\[
+				D^nU^n(\varnothing) = \left(\sum_{\lambda \vdash n} (f^\lambda)^2\right) \varnothing.
+			\]
+			\qed
+		\end{enumerate}
+	\end{solution}
+	
+	
+	
+	\item The pair $(X,\mathcal{B})$ is a $t-(v,k,\ell)$ design if $X$ is a finite set and $\mathcal{B} \subseteq \binom{X}{k}$ so that every $t$--element set $T \subset X$ is a subset of exactly $\ell$ elements of $\mathcal{B}$.
+	\begin{enumerate}
+		\item For $s \in [t-1]$, show that $(X,\mathcal{B})$ is an $s-(v,k,\rho)$ design for some $\rho \in \mathbb{N}$ and find a formula for $\rho$ in terms of $t, v, k$ and $\ell$.
+		\item Show the following quantity is a positive integer for $0 \leq i < t$:
+		\[
+		\ell \binom{v-i}{t-i} \big/ \binom{k-i}{t-i}.
+		\]
+	\end{enumerate}
+	
+	\begin{solution}
+		\begin{enumerate}
+			\item We claim that $\rho=\ell \binom{v-s}{t-s} \big/ \binom{k-s}{t-s}$ gives an $s-(v,k,\rho)$ design. It suffices to show that every $s$--element set $S \subset X$ is a subset of exactly $\ell$ elements of $\mathcal{B}$. To do this, we will pick an element $B$ along with the elements \textit{not} in $S$ but in $T$, i.e. $T\setminus S$. One way we can do this is by picking our elements of $T\setminus S$, which can be done in $\binom{v-s}{t-s}$ ways, then picking from the $\ell$ elements of $\mathcal{B}$. We can also pick $B$ with $S \subset B$ in $\rho$ ways, then pick the elements of $T\setminus S$ in $\binom{k-s}{t-s}$ ways. This equality can be rearranged to lead to the formula in our claim.
+			\item Taking the $s-(v,k,\rho)$ design from (a) with $s=i$, we see that $\rho=\ell \binom{v-i}{t-i} \big/ \binom{k-i}{t-i}$ is a positive integer, so (b) follows immediately.
+		\end{enumerate}
+	\end{solution}
+	
+	% \item \begin{enumerate}
+	% \item  For $x \in PG(2,2)$, show that the matroid $PG(2,2) - x$ is isomorphic to $\mathcal{M}(K_4)$.
+	
+	% (Compare to Figures 3.2 and 3.3 in the alternate text)
+	
+	% \item For $q = p^k$ a prime power, show there exists a set $S \subseteq PG(2,q)$ so that the matroid $PG(2,q) - S$ is isomorphic to $\mathcal{M}(K_4)$.
+	% \end{enumerate}
+\end{enumerate}
+
+\textbf{Extra credit}
+
+\begin{enumerate}
+	\item[3] (8 points) Construct
+$
+\mathcal{B} \subseteq \binom{[9]}{4}^2
+$
+	so that:
+	\begin{itemize}
+		\item for $(A,B) \in \mathcal{B}$, we have $A \cap B = \varnothing$;
+		\item 
+		for every pair $\{a,b\} \subseteq [9]$, there are exactly three pairs $(A,B) \in \mathcal{B}$ so that $\{a,b\}\subseteq A$ or $\{a,b\}\subseteq B$;
+		\item for every triple $\{a,b,c\} \subseteq [9]$ there is exactly one pair $(A,B) \in \mathcal{B}$ so that $\{a,b,c\} \subseteq A$ or $\{a,b,c\} \subseteq B$;
+	\end{itemize}
+
+\begin{solution}
+	We claim that such a $\mathcal{B}$ \textit{cannot} exist\footnote{I know it's a stretch to prove nonexistence for a question asking to ``construct'', but I have yet to find fault in the contradiction that follows.}.
+	
+	For $\mathcal{B}$ to satisfy the third condition, there are $\binom{9}{3}=84$ triples that must be a subset of $A$ or $B$ for exactly one $(A,B) \in \mathcal{B}$. However, taking arbitrary $(A,B) \in \mathcal{B}$, we see that there are $\binom{4}{3}=4$ distinct triples in each of $A$ and $B$. Since $A$ and $B$ are disjoint, we must have $8$ distinct triples in any element of $\mathcal{B}$. Because triples must also be distinct between elements of $\mathcal{B}$ to follow the third condition, the total number of triples in $\mathcal{B}$ would be $8\cdot \#\mathcal{B}$. However, $8\nmid 84$, so we have a contradiction. \qed
+
+	
+\end{solution}
+
+\end{enumerate}
+
+\end{document}

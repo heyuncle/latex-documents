@@ -1,0 +1,125 @@
+\documentclass[11pt,letterpaper,dvipsnames]{article}
+\usepackage{fullpage}
+\usepackage{multicol}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{graphicx, nicefrac}
+\usepackage{tikz, nicefrac}
+
+\newcommand{\ds}{\displaystyle}
+\newcommand{\bv}{\mathbf}
+\newcommand{\lv}{\langle}
+\newcommand{\rv}{\rangle}
+\newcommand{\qbin}[2]{\begin{bmatrix}{#1}\\ {#2}\end{bmatrix}_q}
+\newcommand{\qf}[1]{[#1]_q!}
+
+\newenvironment{solution}{\color{Violet}\textit{Solution.}}{\color{black}}
+
+\begin{document}
+
+%%%Version 1%%%%
+
+\flushleft
+
+\begin{center}
+    \begin{large}
+        \textbf{Homework 6} \\
+        MAD4204 \\ 
+        Carson Mulvey
+    \end{large}
+\end{center}
+
+\pagestyle{empty}
+
+
+\begin{enumerate}
+
+\item Let $S = \{\vec{v}_1,\dots \vec{v}_k\} \subseteq \mathbb{F}_q^n$.
+Show that $\vec{x} \in \overline{S}$, the affine closure of $S$, if and only if
+\[
+\vec{x} = \sum_{i=1}^k a_i \vec{v}_i \quad \mbox{with} \quad \sum_{i=1}^k a_i = 1.
+\]
+
+\item[2.] \begin{enumerate}
+\item Prove the following identity stated in class:
+\[
+\qbin{n+1}{k} = \qbin{n}{k-1} + q^k \qbin{n}{k}.
+\]
+
+\item Using (a), give an inductive proof that $\qbin{n}{k}$ is a polynomial in the variable $q$.
+ \end{enumerate}
+\begin{solution}
+	\begin{enumerate}
+		\item Using the fact that $\qf{n}=[n]_q\cdot\qf{n-1}$, we have
+		\begin{align*}
+			\qbin{n}{k-1} + q^k \qbin{n}{k} &= \frac{\qf{n}}{\qf{k-1}\qf{n-k+1}} + \frac{q^k\qf{n}}{\qf{k}\qf{n-k}} \\
+			&= \qf{n} \left( \frac{[k]_q}{\qf{k}\qf{n-k+1}} + \frac{q^k[n-k+1]_q}{\qf{k}\qf{n-k+1}} \right) \\
+			&= \qf{n} \left( \frac{1+q+\cdots+q^{k-1}}{\qf{k}\qf{n-k+1}} + \frac{q^k(1+q+\cdots+q^{n-k}))}{\qf{k}\qf{n-k+1}} \right) \\
+			&= \qf{n} \left( \frac{1+q+\cdots+q^{k-1}+q^k+\cdots+q^n}{\qf{k}\qf{n-k+1}} \right) \\
+			&= \qf{n} \left( \frac{[n+1]_q}{\qf{k}\qf{n-k+1}} \right) \\
+			&= \frac{\qf{n+1}}{\qf{k}\qf{n-k+1}} \\
+			&= \qbin{n+1}{k}
+		\end{align*}
+		as desired. \qed
+		\item We will prove by induction on $n$. For $n=0$, we either have $\qbin{0}{0}=1$ for $k=0$ or $\qbin{0}{k}=0$ for $k>0$.
+		
+		Now assume for some $n\in \mathbb{Z}^+$ that for all $k\in\mathbb{Z}^+$, $\qbin{n}{k}$ is a polynomial in $q$. We need to show that $\qbin{n+1}{k}$ is also a polynomial in $q$. But by (a), this is a linear combination of $\qbin{n}{k-1}$ and $\qbin{n}{k}$, which are each polynomials in $q$ by our inductive hypothesis. Thus $\qbin{n+1}{k}$ is also a polynomial in $q$ for all $k\in\mathbb{Z}^+$, and our inductive step is complete. \qed
+	\end{enumerate}
+\end{solution}
+
+\item[3.] Let $H$ be a hyperplane in $PG(n,q)$.
+Prove that $PG(n,q) - H$ is isomorphic to $AG(n,q)$.
+
+(This is Proposition 5.23 (b) from the alternate text states.)
+
+\begin{solution}
+	We can algebraically map from $AG(n,q)$ to $PG(n,q)-H$ by adding another coordinate to all points with a value of $1$, i.e. mapping
+	\[
+		\begin{bmatrix}x_1 \\ \vdots \\ x_n \end{bmatrix} \mapsto \begin{bmatrix}1 \\ x_1 \\ \vdots \\ x_n \end{bmatrix}.
+	\]
+	$PG(n,q)$ consists of these new points along with some ``hyperplane at infinity'' $H$. These hyperplane points will have a value of $0$ first the first coordinate, so $PG(n,q)-H$ will leave precisely the points from $AG(n,q)$ with the new coordinate. This process by simply removing the first coordinate from all points in $PG(n,q)-H$, retrieving $AG(n,q)$. Since all points can be mapped, the point incidences, line incidences, etc. will also be isomorphic. \qed
+\end{solution}
+
+\item Prove there are unique projective planes or orders two and three (up to
+relabeling $X$).
+
+\begin{solution}
+	Let $(X,\mathcal{B})$ be a projective plane of order two that isn't the Fano Plane. We claim that $Y$ is a relabeling of a Fano Plane, showing that it is the unique projective plane of order 2. Representing the points of the Fano Plane in $\mathbb{F}_2^3$, we can label our $Y$ similarly
+\end{solution}
+
+\end{enumerate}
+
+
+
+\textbf{Challenge Problem (8 points extra credit)}
+\begin{enumerate}
+\item Define
+\[
+\qbin{x}{k} = \frac{x\cdot \left(x - [1]_q\right) \cdot \ldots \cdot \left(x - [k-
+1]_q\right)}{q^{\binom{k}{2}} [k]!_q }.
+\]
+Show that
+\[
+\qbin{x}{m}\cdot \qbin{x}{n} = \sum_{k = \max{m,n}}^{m+n} \frac{q^{(k-m)(k-n)} [k]!
+_q}{[k-m]!_q [k-n]!_q [m+n-k]!_q } \qbin{x}{k}.
+\]
+\begin{solution}
+	WLOG assume that $m\geq n$. We will prove by induction on $m$. For $m=0$, clearly
+	\[
+		\qbin{x}{0}\cdot \qbin{x}{0} = \frac{q^{(0)(0)} [0]!
+_q}{[0]!_q [0]!_q [0]!_q } \qbin{x}{0}=1.
+	\]
+	We now assume for some $m$ that for all $n\leq m$, the identity above holds. Then
+	\begin{align*}
+		\sum_{k = \max{m+1,n}}^{m+n+1} \frac{q^{(k-m+1)(k-n)} [k]_q!
+}{[k-m+1]_q! [k-n]_q! [m+n-k+1]_q! } \qbin{x}{k} \\
+= \sum_{k = m+1}^{m+n+1} \frac{q^{(k-m+1)(k-n)} [k]_q!
+}{[k-m+1]_q! [k-n]_q! [m+n-k+1]_q! } \qbin{x}{k}
+	\end{align*}
+\end{solution}
+
+\end{enumerate}
+
+\end{document}
