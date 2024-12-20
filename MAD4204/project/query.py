@@ -1,3 +1,5 @@
+# TODO go back and fix based on original video
+
 def powerset(S):
     for i in range(2 ** len(S)):
         partial = []
@@ -6,11 +8,11 @@ def powerset(S):
                 partial.append(S[j])
         yield partial
 
-def entail(A,B):
-    pass
+# def entail(A,B):
+#     pass
 
-def inference(P, Q):
-    for A, p in P:
+# def inference(P, Q):
+#     for A, p in P:
 
 
 
